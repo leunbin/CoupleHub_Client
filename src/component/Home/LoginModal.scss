@@ -1,0 +1,78 @@
+.LoginModalRoot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login__container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.login__form {
+  margin-top: 1rem;
+}
+
+.input__group {
+  margin-bottom: 1rem;
+}
+
+.input__group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.input__group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.password__input {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password__input input {
+  flex: 1;
+}
+
+.password__toggle {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #888;
+}
+
+.login__button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #eebef7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.login__footer {
+  margin-top: 1rem;
+}
+
+.signup__link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup__link:hover {
+  text-decoration: underline;
+}

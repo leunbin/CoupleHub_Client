@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@300;400;700&display=swap');
+
+body {
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  height: 1.5rem;
+  width: 100%;
+  display: flex;
+  padding: 0.5rem;
+  gap: 1.5rem;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(154, 105, 136);
+    opacity: 0.7;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
