@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./main.scss";
 import Router from "./Router";
 import {socket} from './socket';
+import { SidebarProvider } from "./store/SidebarContext";
 
 function App() {
   useEffect(() => {
@@ -28,9 +29,9 @@ function App() {
     socket.emit('message', 'Hello from client!');
   }
   return (
-    <>
+    <SidebarProvider>
       <Router socket={socket} />
-    </>
+    </SidebarProvider>
   );
 }
 

@@ -1,0 +1,43 @@
+.Weekplan_root{
+  display: flex;
+  width: 80rem;
+  height: 15rem;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.Weekplan_week {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.Weekplan_content{
+  display: flex;
+  flex-direction: column;
+}
+
+.Weekplan_week > div {
+  flex: 1;
+  border-right: 1px groove #bebebe;
+}
+
+.Weekplan_week > div:last-child {
+  border-right: none;
+}
+
+.Weekplan_day {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem;
+  height: 1rem;
+}
+
+.Weekplan_day_schedule {
+  padding: 0.5rem;
+}

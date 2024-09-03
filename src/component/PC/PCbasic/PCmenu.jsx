@@ -9,10 +9,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./PCmenu.scss";
 import { Link } from "react-router-dom";
+import { useSidebar } from "../../../store/SidebarContext";
 
-const PCmenu = ({
-  setIsMenuOpen,
-}) => {
+const PCmenu = () => {
+  const {isMenuOpen, setIsMenuOpen} = useSidebar();
   const [isMenuClosing, setIsMenuClosing] = useState(false);
   const outside = useRef(null);
 
@@ -37,7 +37,7 @@ const PCmenu = ({
 
   return (
     <div
-      className={`PCmenuRoot ${isMenuClosing ? "slide-out" : ""}`}
+      className={`PCmenuRoot ${isMenuClosing ? "slide-out" : "slide-in"}`}
       ref={outside}
     >
       <button onClick={handleClose} className="PCmenu_bars_button">

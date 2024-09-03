@@ -10,14 +10,15 @@ import React, { useState } from "react";
 import "./PCsidenav.scss";
 import { Link } from "react-router-dom";
 import PCmenu from "./PCmenu";
+import { useSidebar } from "../../../store/SidebarContext";
 
 const PCsidenav = ({ children }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useSidebar();
 
   return (
     <div className="sidenav_root">
       {isMenuOpen ? (
-        <PCmenu setIsMenuOpen={setIsMenuOpen} />
+        <PCmenu setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
       ) : (
         <div className="sidenav_button_bar">
           <button
