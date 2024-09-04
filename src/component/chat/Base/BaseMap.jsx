@@ -1,6 +1,6 @@
 import React from "react";
 import { Map } from "react-kakao-maps-sdk";
-import useKakaoLoader from "../../hook/useKakaoLoader";
+import useKakaoLoader from "../../../hook/useKakaoLoader";
 
 const BaseMap = () => {
   useKakaoLoader();

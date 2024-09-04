@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import PCheader from "../component/PC/PCbasic/PCheader";
 import PCsidenav from "../component/PC/PCbasic/PCsidenav";
 import PCfooter from "../component/PC/PCbasic/PCfooter";
-import CalendarModal from "../component/PC/Dashboard/CalendarModal";
 import "./Dashboard.scss";
 import Weekplan from "../component/PC/Dashboard/Weekplan";
-import Weather from "../component/PC/Dashboard/Weather";
+import BaseMap from "../component/chat/Base/BaseMap";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ socket }) => {
   return (
@@ -14,10 +14,16 @@ const Dashboard = ({ socket }) => {
         <PCheader />
         <div className="dashboard_main">
           <div className="dashboard_line1">
-            <Weekplan />
-            <Weather />
+            <div className="dashboard_weekplan">
+              <Weekplan />
+            </div>
           </div>
-          {/* <CalendarModal /> */}
+          <div className="dashboard_line2">
+            <div className="dashboard_map">
+              <BaseMap />
+              sdfe
+            </div>
+          </div>
         </div>
         <PCfooter socket={socket} />
       </PCsidenav>

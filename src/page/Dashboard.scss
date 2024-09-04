@@ -1,8 +1,38 @@
 .dashboard_main{
   padding: 0.5rem;
+  width: calc(100vw - 3rem);
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
 .dashboard_line1{
   display: flex;
   width: 100%;
+  height: 40%;
+  margin-bottom: 1rem;
+}
+
+.dashboard_weekplan{
+  width: 80%;
+  height: 100%;
+}
+
+.dashboard_line2{
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+}
+
+.dashboard_map{
+  height: calc(100% - 1rem);
+  width: 60%;
+  overflow: hidden;
+  padding-bottom: 1rem;
+  border-radius: 5px;
+  bottom: 1rem;
+  margin-bottom: 1rem;
 }

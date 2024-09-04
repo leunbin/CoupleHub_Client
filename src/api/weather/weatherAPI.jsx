@@ -13,7 +13,7 @@ const weatherAPI = async ({date, time, nx, ny}) => {
     return result.data.response.body.items.item;
   } catch (error) {
     console.error('Error fetching weather data:', error);
-    throw error; // 에러를 호출자에게 전달
+    throw error;
   }
 }
 

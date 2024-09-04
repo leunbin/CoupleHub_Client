@@ -3,13 +3,14 @@ import "./PCheader.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
+import Weather from "./Weather";
 
 const PCheader = () => {
   const today = new Date().toLocaleDateString();
   const todayData = new Date();
   const couple = new Date("2024-04-03");
   const differenceInTime = todayData.getTime() - couple.getTime();
-  const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+  const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24))+1;
 
   const location = useLocation();
   const path = location.pathname;
@@ -55,6 +56,7 @@ const PCheader = () => {
               <span>{today}</span>
               <span className="PCheader_user">hi, @@@</span>
             </div>
+            <Weather />
             <div className="couple_date">
               <FontAwesomeIcon icon={faHeart} />
               {differenceInDays}
