@@ -3,21 +3,32 @@
   width: calc(100vw - 3rem);
   flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.dashboard_main_right {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+}
+
+.dashboard_main_left {
+  flex: 1;
+  margin-left: 0.5rem;
 }
 
 .dashboard_line1{
   display: flex;
   width: 100%;
   height: 40%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .dashboard_weekplan{
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 
@@ -25,14 +36,38 @@
   width: 100%;
   height: 50%;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dashboard_map{
-  height: calc(100% - 1rem);
-  width: 60%;
+  height: 65vh;
+  width: 80%;
   overflow: hidden;
   padding-bottom: 1rem;
   border-radius: 5px;
   bottom: 1rem;
   margin-bottom: 1rem;
+}
+
+.dashboard_place{
+  height: 66.5vh;
+  width: 20%;
+}
+
+.dashboard_memo{
+  height: 91.7vh;
+  width: 100%;
+}
+
+@media screen and (max-height: 800px) {
+  .dashboard_map {
+    height: 57vh;
+  }
+  .dashboard_place {
+    height:60vh
+  }
+  .dashboard_memo{
+    height: 87vh;
+  }
 }
