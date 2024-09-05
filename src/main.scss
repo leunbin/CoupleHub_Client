@@ -24,9 +24,10 @@ button {
   display: flex;
   padding: 0.5rem;
   gap: 1.5rem;
+
   &:hover {
     cursor: pointer;
-    background-color: rgb(154, 105, 136);
+    background-color: #FFBEBE;
   }
 }
 
@@ -35,3 +36,13 @@ a {
   text-decoration: none;
 }
 
+input,
+select,
+textarea {
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 300;
+}
+
+select{
+  cursor: pointer;
+}

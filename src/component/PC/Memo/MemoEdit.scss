@@ -1,0 +1,147 @@
+.MemoEdit_root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.MemoEdit_button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.MemoEdit_save,
+.MemoEdit_priority {
+  display: flex;           
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+}
+
+.MemoEdit_save {
+  color: #4caf50;
+}
+
+.MemoEdit_priority {
+  color: #ff9800;
+}
+
+.MemoEdit_save:hover,
+.MemoEdit_priority:hover {
+  opacity: 0.8;
+}
+
+
+.MemoEdit_save {
+  color: #4caf50;
+}
+
+.MemoEdit_priority {
+  color: #b4b4b4;
+  transition: color 0.3s;
+
+  &.active {
+    color: #FFDC3C;
+  }
+}
+
+.MemoEdit_title,
+.MemoEdit_type,
+.MemoEdit_deadline,
+.MemoEdit_author {
+  width: 90%;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.MemoEdit_title_input,
+.MemoEdit_type_select,
+.MemoEdit_author_input {
+  width: 90%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.Memo_deadline_div {
+  display: flex;
+  width: 90%;
+  gap: 0.5rem;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.MemoEdit_calendar {
+  position: relative;
+  display: flex;      
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.MemoList_deadline_input{
+  flex: 1;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.MemoEdit_title_input,
+.MemoEdit_author_input {
+  margin-bottom: 1rem;
+}
+
+.MemoEdit_type_select {
+  margin-bottom: 1rem;
+}
+
+.MemoList_deadline_input {
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.MemoEdit_calendar {
+  color: #2196f3;
+}
+
+.MemoEdit_calendar:hover {
+  color: #1976d2;
+}
+
+.Memo_custom_calendar_modal {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.MemoEdit_author_input {
+  background-color: #eee;
+  color: #888;
+  cursor: not-allowed;
+}

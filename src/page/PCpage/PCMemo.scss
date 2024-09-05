@@ -1,0 +1,36 @@
+.PCMemo_main{
+  padding: 0.5rem;
+  width: calc(100vw - 3rem);
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
+  gap: 0.5rem;
+}
+
+.PCMemo_list{
+  width: 20%;
+  height: 91.7vh;
+}
+
+.PCMemo_memo{
+  height: 91.7vh;
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.PCMemo_edit{
+  width: 20%;
+  height: 91.7vh;
+}
+
+@media screen and (max-height:800px) {
+  .PCMemo_list,
+  .PCMemo_memo,
+  .PCMemo_edit {
+    height: 87vh;
+  }
+
+  
+}

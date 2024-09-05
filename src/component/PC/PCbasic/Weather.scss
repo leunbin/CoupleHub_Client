@@ -31,3 +31,9 @@
   animation: slideUp 0.5s ease-in-out;
   animation-fill-mode: forwards; 
 }
+
+.Weather_info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

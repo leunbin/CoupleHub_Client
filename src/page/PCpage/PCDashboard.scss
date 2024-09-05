@@ -1,4 +1,4 @@
-.dashboard_main{
+.PCdashboard_main{
   padding: 0.5rem;
   width: calc(100vw - 3rem);
   flex: 1;
@@ -8,31 +8,31 @@
   overflow: hidden;
 }
 
-.dashboard_main_right {
+.PCdashboard_main_right {
   display: flex;
   flex-direction: column;
   width: 80%;
   height: 100%;
 }
 
-.dashboard_main_left {
+.PCdashboard_main_left {
   flex: 1;
   margin-left: 0.5rem;
 }
 
-.dashboard_line1{
+.PCdashboard_line1{
   display: flex;
   width: 100%;
   height: 40%;
   margin-bottom: 0.5rem;
 }
 
-.dashboard_weekplan{
+.PCdashboard_weekplan{
   width: 100%;
   height: 100%;
 }
 
-.dashboard_line2{
+.PCdashboard_line2{
   width: 100%;
   height: 50%;
   overflow: hidden;
@@ -40,7 +40,7 @@
   justify-content: space-between;
 }
 
-.dashboard_map{
+.PCdashboard_map{
   height: 65vh;
   width: 80%;
   overflow: hidden;
@@ -50,24 +50,24 @@
   margin-bottom: 1rem;
 }
 
-.dashboard_place{
+.PCdashboard_place{
   height: 66.5vh;
   width: 20%;
 }
 
-.dashboard_memo{
+.PCdashboard_memo{
   height: 91.7vh;
   width: 100%;
 }
 
 @media screen and (max-height: 800px) {
-  .dashboard_map {
+  .PCdashboard_map {
     height: 57vh;
   }
-  .dashboard_place {
+  .PCdashboard_place {
     height:60vh
   }
-  .dashboard_memo{
+  .PCdashboard_memo{
     height: 87vh;
   }
 }
