@@ -1,20 +1,16 @@
-import axios from "axios";
+import axios from 'axios';
 
 const weatherAPI = async ({date, time, nx, ny}) => {
-  const apikey = process.env.REACT_APP_WEATHER_API_KEY;
-  const url = process.env.REACT_APP_WEATHER_CALLBACK_URL;
-  const requestUrl = `${url}?serviceKey=${apikey}&numOfRows=7&pageNo=1&dataType=JSON&base_date=${date}&base_time=${time}&nx=${nx}&ny=${ny}`
-
-  
   try {
-    const result = await axios.get(requestUrl);
-    console.log(requestUrl)
+    const result = await axios.get(`http://localhost:4000/api/weather`, {
+      params: { date, time, nx, ny }
+    });
     console.log(result);
-    return result.data.response.body.items.item;
+    return result.data;
   } catch (error) {
     console.error('Error fetching weather data:', error);
     throw error;
   }
-}
+};
 
 export default weatherAPI;
