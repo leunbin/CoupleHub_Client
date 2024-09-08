@@ -1,4 +1,4 @@
-.PCMemo_main{
+.PCcalendar_main{
   padding: 0.5rem;
   width: calc(100vw - 3rem);
   flex: 1;
@@ -9,26 +9,25 @@
   gap: 0.5rem;
 }
 
-.PCMemo_list{
-  width: 20%;
+.PCcalendar_schedule{
+  width: 15%;
   height: 91.7vh;
 }
 
-.PCMemo_memo{
+.PCcalendar_calendar{
   height: 91.7vh;
   flex: 1;
-  margin-right: 0.5rem;
 }
 
-.PCMemo_edit{
-  width: 20%;
+.PCcalendar_edit{
+  width: 30%;
   height: 91.7vh;
 }
 
 @media screen and (max-height:800px) {
-  .PCMemo_list,
-  .PCMemo_memo,
-  .PCMemo_edit {
+  .PCcalendar_schedule,
+  .PCcalendar_main,
+  .PCcalendar_edit {
     height: 87vh;
   }
 }

@@ -4,7 +4,7 @@ import PCsidenav from "../../component/PC/PCbasic/PCsidenav";
 import PCfooter from "../../component/PC/PCbasic/PCfooter";
 import "./PCDashboard.scss";
 import Weekplan from "../../component/PC/Dashboard/Weekplan";
-import BaseMap from "../../component/chat/Base/BaseMap";
+import BaseMap from "../../component/Base/BaseMap";
 import MapPlace from "../../component/PC/Dashboard/MapPlace";
 import MemoModal from "../../component/PC/Dashboard/MemoModal";
 

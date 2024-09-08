@@ -1,0 +1,28 @@
+.MapSearch_root {
+  display: flex;
+  height: 2rem;
+  width: 20rem;
+  border: 0.2rem solid #bebebe;
+  box-sizing: border-box;
+  z-index: 10;
+  justify-content: space-between;
+  padding: 0.2rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.MapSearch_input{
+  flex: 1;
+  border: none;
+  &:focus{
+    outline: none;
+  }
+}
+
+.MapSearch_button {
+  width: auto;
+  height: auto;
+}
+
+
+

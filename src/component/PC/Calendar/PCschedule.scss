@@ -1,0 +1,69 @@
+.PCschedule_root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.PCschedule_title {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.PCschedule_content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  overflow-y: auto;
+}
+
+.PCschedule_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right, #ffbc9b, #ffffff);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.PCschedule_item:hover {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.PCschedule_item_event {
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.PCschedule_item_time {
+  font-size: 0.5;
+  font-weight: 400;
+  color: #b4b4b4;
+}
+
+.PCschedule_content::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.PCschedule_content::-webkit-scrollbar-thumb {
+  background-color: #FFDCE1;
+  border: 2px solid #FFDCE1;
+  border-radius: 12px;
+}

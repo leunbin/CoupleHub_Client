@@ -9,9 +9,7 @@ const CalendarModal = forwardRef(({ setDate, className, ...props }, ref) => {
         className="custom-calendar"
         calendarType="gregory"
         prev2Label={null}
-        prevLabel={null}
         next2Label={null}
-        nextLabel={null}
         onClickDay={(day) => setDate(day)}
       />
     </div>

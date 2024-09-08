@@ -18,10 +18,6 @@ const PCMemo = ({ socket }) => {
     author: "이은빈",
   });
 
-  useEffect(() => {
-    console.log(memo)
-  },[memo])
-
   return (
     <div className="PCMemo_root">
       <PCsidenav>

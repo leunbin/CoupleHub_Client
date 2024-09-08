@@ -4,7 +4,11 @@ import pluginReact from 'eslint-plugin-react';
 
 export default {
   languageOptions: {
-    globals: globals.browser,
+    globals: {
+      ...globals.browser,
+      kakao: 'readonly',
+      window: 'readonly',
+    },
   },
   plugins: {
     react: pluginReact,

@@ -41,13 +41,11 @@
 }
 
 .PCdashboard_map{
-  height: 65vh;
+  height: 66.5vh;
   width: 80%;
   overflow: hidden;
-  padding-bottom: 1rem;
   border-radius: 5px;
-  bottom: 1rem;
-  margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 .PCdashboard_place{
@@ -62,7 +60,7 @@
 
 @media screen and (max-height: 800px) {
   .PCdashboard_map {
-    height: 57vh;
+    height: 60vh;
   }
   .PCdashboard_place {
     height:60vh

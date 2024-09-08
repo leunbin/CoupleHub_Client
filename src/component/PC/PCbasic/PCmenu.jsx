@@ -57,13 +57,6 @@ const PCmenu = () => {
           <span>Calendar</span>
         </button>
       </Link>
-
-      <Link to="/map" className='PCmenu_tag'>
-        <button className="PCmenu_button">
-          <FontAwesomeIcon icon={faMap} />
-          <span>Map</span>
-        </button>
-      </Link>
       
       <Link to="/memo" className='PCmenu_tag'>
         <button className="PCmenu_button">

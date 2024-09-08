@@ -1,0 +1,108 @@
+.PCcalendarEdit_root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.PCcalendarEdit_button {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.PCcalendarEdit_save {
+  color: #4caf50;
+  display: flex;           
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+}
+
+.PCcalendarEdit_time_wrapper{
+  display: flex;
+  gap: 0.2rem;
+}
+
+.PCcalendarEdit_time_wrapper_content{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.PCcalendarEdit_event,
+.PCcalendarEdit_time,
+.PCcalendarEdit_note,
+.PCcalendarEdit_color,
+.PCcalendarEdit_location {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.PCcalendarEdit_event_input,
+.PCcalendarEdit_note_textarea,
+.PCcalendarEdit_color_select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.PCcalendarEdit_time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.PCcalendarEdit_time_input {
+  width: 10rem;
+  flex: 1;
+}
+
+.PCcalendarEdit_note_textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.PCcalendarEdit_color_select {
+  border: 1px solid #ddd;
+}
+
+.PCcalendarEdit_map {
+  position: relative;
+  flex: 1;
+}
+
+.PCcalendarEdit_location_input {
+  background-color: #ddd;
+  cursor: not-allowed;
+  border: #000000;
+  height: 2rem;
+  border-radius: 3px;
+}
+
+.PCcalendarEdit_MapSearch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  padding: 0.5rem;
+  justify-content: center; 
+  align-items: flex-start;
+  z-index: 1; 
+}

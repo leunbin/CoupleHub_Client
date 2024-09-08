@@ -10,7 +10,6 @@ const useConvertCoords = ({ lat, lng }) => {
   });
 
   useEffect(() => {
-    console.log(lat,lng);
     const RE = 6371.00877; // 지구 반경(km)
     const GRID = 5.0; // 격자 간격(km)
     const SLAT1 = 30.0 * (Math.PI / 180.0); // 투영 위도1(rad)
@@ -36,8 +35,6 @@ const useConvertCoords = ({ lat, lng }) => {
     const theta = (lng * (Math.PI / 180.0)) - OLON;
     const x = Math.floor(ra * Math.sin(theta) + XO + 0.5);
     const y = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
-    console.log(`lat: ${lat}, lng: ${lng}`);
-    console.log(`x: ${x}, y: ${y}`);
 
     if (lat !== undefined && lng !== undefined) {
       setCoords({
@@ -57,10 +54,6 @@ const useConvertCoords = ({ lat, lng }) => {
       });
     }
   }, [lat, lng]);
-
-  useEffect(() => {
-    console.log(coords);
-  },[coords])
 
   return coords;
 };

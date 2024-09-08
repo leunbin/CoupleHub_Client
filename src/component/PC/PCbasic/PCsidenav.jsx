@@ -40,11 +40,6 @@ const PCsidenav = ({ children }) => {
             </button>
           </Link>
 
-          <Link to="/map">
-            <button className="sidenav_button">
-              <FontAwesomeIcon icon={faMap} />
-            </button>
-          </Link>
           <Link to="/memo">
             <button className="sidenav_button">
               <FontAwesomeIcon icon={faList} />

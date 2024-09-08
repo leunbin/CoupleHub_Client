@@ -21,8 +21,6 @@ const PCheader = () => {
         return "Dashboard";
       case "/calendar":
         return "Calendar";
-      case "/map":
-        return "Map";
       case "/memo":
         return "Memo";
     }
@@ -40,10 +38,6 @@ const PCheader = () => {
 
             <Link to="/calendar">
               <span>Calendar</span>
-            </Link>
-
-            <Link to="/map">
-              <span>Map</span>
             </Link>
 
             <Link to="/memo">
