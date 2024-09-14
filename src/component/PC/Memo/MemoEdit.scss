@@ -146,3 +146,28 @@
   color: #888;
   cursor: not-allowed;
 }
+
+.MemoEdit_deleteTag{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.MemoEidt_deleteBtn {
+  color:#bebebe;     
+  display: flex;           
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+
+  &.active {
+    color:#FF3232;
+  }
+}

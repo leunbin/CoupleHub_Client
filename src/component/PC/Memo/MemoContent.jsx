@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MemoContent.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const MemoContent = ({ memo, setMemo }) => {
   const [items, setItems] = useState(memo.content || []);
@@ -9,6 +11,10 @@ const MemoContent = ({ memo, setMemo }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    setItems(memo.content || []);
+  }, [memo]);
 
   useEffect(() => {
     setMemo({ ...memo, content: items });
@@ -32,13 +38,19 @@ const MemoContent = ({ memo, setMemo }) => {
     }
   };
 
+  const handleDelete = (index) => {
+    const updatedItems = items.filter((_, i) => i !== index);
+    setItems(updatedItems);
+  };
+
   return (
     <div className="MemoContent_root">
       <div className="MemoContent_info">
         <div className="MemoContent_createdDate">
           <span className="MemoContent_createdDate_title">CreatedDate</span>
           <div className="MemoContent_createdDate_content">
-            {memo.createdDate.toLocaleDateString()}
+            {memo.createdDate &&
+              new Date(memo.createdDate).toLocaleDateString()}
           </div>
         </div>
 
@@ -59,10 +71,12 @@ const MemoContent = ({ memo, setMemo }) => {
           ) : null}
         </div>
 
-        {memo.dueDate !== "" ? (
+        {memo.dueDate ? (
           <div className="MemoContent_deadline">
             <span className="MemoContent_deadline_title">deadline</span>
-            <div className="MemoContent_deadline_content">{memo.dueDate}</div>
+            <div className="MemoContent_deadline_content">
+              {new Date(memo.dueDate).toLocaleDateString()}
+            </div>
           </div>
         ) : null}
       </div>
@@ -93,12 +107,20 @@ const MemoContent = ({ memo, setMemo }) => {
                     item.completed ? "completed" : ""
                   }`}
                 >
-                  <input
-                    type="checkbox"
-                    checked={item.completed}
-                    onChange={() => handleCheckboxChange(index)}
-                  />
-                  <span>{item.text}</span>
+                  <div className="CheckboxList_item_content">
+                    <input
+                      type="checkbox"
+                      checked={item.completed}
+                      onChange={() => handleCheckboxChange(index)}
+                    />
+                    <span>{item.text}</span>
+                  </div>
+                  <button
+                    className="CheckboxList_item_delete"
+                    onClick={() => handleDelete(index)}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
                 </div>
               ))}
             </div>

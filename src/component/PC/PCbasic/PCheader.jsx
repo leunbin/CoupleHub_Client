@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PCheader.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
 import Weather from "./Weather";
+import { useSelector } from "react-redux";
 
 const PCheader = () => {
   const today = new Date().toLocaleDateString();
   const todayData = new Date();
   const couple = new Date("2024-04-03");
   const differenceInTime = todayData.getTime() - couple.getTime();
-  const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24))+1;
+  const differenceInDays =
+    Math.floor(differenceInTime / (1000 * 3600 * 24)) + 1;
 
   const location = useLocation();
   const path = location.pathname;
+  const name = JSON.parse(localStorage.getItem("user-info")).name;
 
   const getTitle = () => {
     switch (path) {
@@ -43,12 +46,11 @@ const PCheader = () => {
             <Link to="/memo">
               <span>Memo</span>
             </Link>
-
           </div>
           <div className="date">
             <div className="content">
               <span>{today}</span>
-              <span className="PCheader_user">hi, @@@</span>
+              <span className="PCheader_user">hi, {name}</span>
             </div>
             <Weather />
             <div className="couple_date">

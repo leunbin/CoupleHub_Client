@@ -5,7 +5,10 @@ const fetchWeather = async({date,time,nx,ny}) => {
     const datas = await weatherAPI({date,time,nx,ny});
     return datas;
   } catch(error) {
-    console.log(error);
+    console.log({
+      success: false,
+      message:"Error at fetchWeather.jsx 😢:", error,
+    });
   }
 }
 

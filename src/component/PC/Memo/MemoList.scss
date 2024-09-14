@@ -20,6 +20,9 @@
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   align-items: center;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .List_item:hover {
@@ -44,14 +47,21 @@
   color:#b4b4b4;
 }
 
-.List_item_type.checklist {
-  color: #007bff;
-  background-color: #ffffff;
-  border: #007bff;
-  background-color: #ffffff;
+.List_item_type {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.2rem;
 }
 
-.List_item_type.note {
+.List_item_crown{
+  color: #ff9800;
+}
+
+.List_item_type.Checklist {
+  color: #007bff;
+}
+
+.List_item_type.Note {
   color: #28a745;
 }
 

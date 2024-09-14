@@ -78,16 +78,44 @@
 
 .CheckboxList_item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+.CheckboxList_item.completed {
+  background-color: #f4f4f4;
+  text-decoration: line-through; 
 }
 
 .CheckboxList_item input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
-.CheckboxList_item.completed span {
-  text-decoration: line-through;
-  color: #888;
+.CheckboxList_item span {
+  flex: 1;
 }
+
+.CheckboxList_item_delete{
+  color:#FF3232 ;
+  display: flex;           
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+}
+
 

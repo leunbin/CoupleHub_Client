@@ -111,7 +111,10 @@ const Weather = () => {
             setWeatherData(filterdData);
           })
           .catch((error) =>
-            console.error("Error setting weather data:", error)
+            console.log({
+              success: false,
+              message:  "Error setting weather data🌩️:", error,
+            })
           );
       }
     }

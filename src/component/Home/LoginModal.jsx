@@ -3,26 +3,44 @@ import "./LoginModal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import postLogin from "../../api/auth/postLogin";
+import {setUser} from "../../store/userSlice";
+import fetchUser from "../../api/user/fetchUser";
 
 const LoginModal = () => {
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setPhoneNum(e.target.value);
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = () => {
-    console.log("로그인 시도:", { name, password });
+  const handleLogin = async () => {
+    try {
+      const token = await postLogin({ name, phoneNum });
+      const userData = await fetchUser(token);
+
+      dispatch(setUser({
+        name: userData.name,
+        phoneNum: userData.phoneNum
+      }));
+
+      localStorage.setItem('user-info', JSON.stringify(userData));
+
+    } catch (error) {
+      console.error('로그인 실패:', error);
+    }
   };
 
   return (
@@ -47,7 +65,7 @@ const LoginModal = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
-                value={password}
+                value={phoneNum}
                 onChange={handlePasswordChange}
                 placeholder="Enter your password"
               />

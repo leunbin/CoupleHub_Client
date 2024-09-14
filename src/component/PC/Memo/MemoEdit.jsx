@@ -4,11 +4,12 @@ import {
   faCalendar,
   faCrown,
   faFloppyDisk,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import CalendarModal from "../Dashboard/CalendarModal";
 import "./MemoEdit.scss";
 
-const MemoEdit = ({ memo, setMemo }) => {
+const MemoEdit = ({ memo, setMemo, handleSave, handleDelete }) => {
   const [date, setDate] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
   const outside = useRef(null);
@@ -59,7 +60,7 @@ const MemoEdit = ({ memo, setMemo }) => {
   return (
     <form className="MemoEdit_root">
       <div className="MemoEdit_button">
-        <button className="MemoEdit_save">
+        <button className="MemoEdit_save" onClick={handleSave}>
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
 
@@ -109,7 +110,9 @@ const MemoEdit = ({ memo, setMemo }) => {
           type="text"
           className="MemoList_deadline_input"
           placeholder={date ? date.toLocaleDateString() : "none"}
-          value={memo.dueDate}
+          value={
+            memo.dueDate ? new Date(memo.dueDate).toLocaleDateString() : "none"
+          }
           readOnly
         />
         <button
@@ -138,6 +141,12 @@ const MemoEdit = ({ memo, setMemo }) => {
         placeholder={memo.author}
         readOnly
       />
+
+      <div className="MemoEdit_deleteTag">
+        <button type="button" className={`MemoEidt_deleteBtn ${memo._id ? "active" : "" }`} onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
     </form>
   );
 };
