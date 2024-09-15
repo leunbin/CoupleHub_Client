@@ -23,6 +23,8 @@ const PCCalendar = ({ socket }) => {
     boxcolor: "",
   });
 
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
+
   const [schedules, setSchedules] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dateSchedules, setDateSchedules] = useState([]);
@@ -48,6 +50,7 @@ const PCCalendar = ({ socket }) => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
+      const date = selectedDate.toLocaleDateString();
       if (schedule._id) {
         const data = await putSchedule(schedule._id, schedule);
         setSchedule((pre) => ({
@@ -70,25 +73,20 @@ const PCCalendar = ({ socket }) => {
         note: "",
         boxcolor: "",
       });
+      await getSchedulesByDate(date);
       await getSchedules();
     } catch (error) {
       console.log("저장실패", error);
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
+    e.preventDefault();
     try {
-      if(schedule._id) {
-        await deleteSchedule(schedule._id);
-        setSchedule({
-          date: "",
-          startTime: "",
-          endTime: "",
-          event: "",
-          location: "",
-          note: "",
-          boxcolor: "",
-        });
+      const date = selectedDate.toLocaleDateString();
+      if(selectedSchedule._id) {
+        await deleteSchedule(selectedSchedule._id);
+        setSelectedSchedule(null)
       } else {
         setSchedule({
           date: "",
@@ -100,11 +98,12 @@ const PCCalendar = ({ socket }) => {
           boxcolor: "",
         });
       }
+      await getSchedulesByDate(date);
       await getSchedules();
     } catch (error) {
       console.log("삭제 실패", error);
     }
-  };
+  }
 
   useEffect(() => {
     getSchedules();
@@ -113,15 +112,7 @@ const PCCalendar = ({ socket }) => {
   useEffect(() => {
     const date = selectedDate.toLocaleDateString();
     getSchedulesByDate(date);
-    setSchedule({
-      date: "",
-      startTime: "",
-      endTime: "",
-      event: "",
-      location: "",
-      note: "",
-      boxcolor: "",
-    });
+    setSelectedSchedule(null);
   },[selectedDate]);
 
   return (
@@ -130,7 +121,7 @@ const PCCalendar = ({ socket }) => {
         <PCheader />
         <div className="PCcalendar_main">
           <div className="PCcalendar_schedule">
-            <PCschedule dateSchedules={dateSchedules} setSchedule={setSchedule} schedule={schedule} />
+            <PCschedule dateSchedules={dateSchedules} setSelectedSchedule={setSelectedSchedule} />
           </div>
           <div className="PCcalendar_calendar">
             <PCcalendarContent
@@ -147,6 +138,7 @@ const PCCalendar = ({ socket }) => {
               setSchedule={setSchedule}
               handleSave={handleSave}
               handleDelete={handleDelete}
+              selectedSchedule={selectedSchedule}
             />
           </div>
         </div>

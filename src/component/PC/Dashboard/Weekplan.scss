@@ -1,34 +1,25 @@
-.Weekplan_root{
+.Weekplan_root {
   display: flex;
   height: 23vh;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  padding: 0.5rem;
-  background-color: #f9f9f9; 
+  padding: 1rem;
+  background-color: #f9f9f9;
   transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.Weekplan_root:hover{
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .Weekplan_week {
   display: flex;
   width: 100%;
   height: 100%;
-  // background-color: transparent;
-  border-radius: 3px;
 }
 
-.Weekplan_content{
+.Weekplan_content {
   display: flex;
   flex-direction: column;
-}
-
-.Weekplan_week > div {
   flex: 1;
-  border-right: 1px groove #bebebe;
+  border-right: 1px solid #dcdcdc;
+  padding: 0.5rem;
 }
 
 .Weekplan_week > div:last-child {
@@ -36,14 +27,33 @@
 }
 
 .Weekplan_day {
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
   padding: 0.5rem;
-  height: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .Weekplan_day_schedule {
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.Weekplan_item_event {
+  background-color: #ffffff;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Weekplan_no_events {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 1rem;
 }

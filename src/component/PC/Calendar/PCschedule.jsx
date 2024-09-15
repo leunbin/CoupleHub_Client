@@ -2,10 +2,10 @@ import React from "react";
 import "./PCschedule.scss";
 import fetchScheduleById from "../../../api/schedule/fetchScheduleById";
 
-const PCschedule = ({ dateSchedules, setSchedule }) => {
+const PCschedule = ({ dateSchedules, setSelectedSchedule }) => {
   const handleScheduleItem = async (id) => {
     const result = await fetchScheduleById(id);
-    setSchedule(result)
+    setSelectedSchedule(result)
   }
   
   return (

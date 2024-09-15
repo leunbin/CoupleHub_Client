@@ -60,7 +60,8 @@
 .PCcalendarEdit_event_input,
 .PCcalendarEdit_time_input,
 .PCcalendarEdit_note_textarea,
-.PCcalendarEdit_color_select {
+.PCcalendarEdit_color_select,
+.PCcalendarEdit_location_input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ddd;
@@ -87,8 +88,6 @@
   background-color: #ddd;
   cursor: not-allowed;
   border: #000000;
-  height: 2rem;
-  border-radius: 3px;
 }
 
 .PCcalendarEdit_MapSearch {

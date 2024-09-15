@@ -6,15 +6,17 @@ import MapSearch from "../../Base/MapSearch";
 import "./PCcalendarEdit.scss";
 import { useLocation } from "react-router-dom";
 
-const PCcalendarEdit = ({ schedule, setSchedule, handleSave, handleDelete }) => {
+const PCcalendarEdit = ({ schedule, setSchedule, handleSave, handleDelete, selectedSchedule }) => {
   const location = useLocation();
   const [input, setInput] = useState("");
   const [place, setPlace] = useState("");
 
+  const currentSchedule = selectedSchedule || schedule;
+
   const onChangeSchedule = (e) => {
     setSchedule({
       ...schedule,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -25,13 +27,12 @@ const PCcalendarEdit = ({ schedule, setSchedule, handleSave, handleDelete }) => 
     });
   };
 
-
   useEffect(() => {
     setSchedule({
       ...schedule,
       location: place,
-    })
-  },[place])
+    });
+  }, [place]);
 
   useEffect(() => {
     console.log(schedule);
@@ -40,57 +41,53 @@ const PCcalendarEdit = ({ schedule, setSchedule, handleSave, handleDelete }) => 
   return (
     <form className="PCcalendarEdit_root">
       <div className="PCcalendarEdit_button">
-        <button className="PCcalendarEdit_save" onClick={handleSave}>
+        <button className="PCcalendarEdit_save" type="button" onClick={handleSave}>
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
 
-        <button className="PCcalendarEdit_delete" onClick={handleDelete}>
+        <button className="PCcalendarEdit_delete" type="button" onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
 
-      <label htmlFor="event" className="PCcalendarEdit_event">
-        Event
-      </label>
+      <label htmlFor="event" className="PCcalendarEdit_event">Event</label>
       <input
         type="text"
-        id="event"
+        name="event"
         className="PCcalendarEdit_event_input"
-        placeholder="event"
-        value={schedule.event}
+        placeholder="Event"
+        value={currentSchedule.event || ""}
         onChange={onChangeSchedule}
       />
+
       <div className="PCcalendarEdit_time_wrapper">
-        <label htmlFor="time" className="PCcalendarEdit_time">
-          Time
-        </label>
+        <label htmlFor="startTime" className="PCcalendarEdit_time">Time</label>
         <div className="PCcalendarEdit_time_wrapper_content">
           <input
             type="time"
-            name="start-time"
-            id="startTime"
-            value={schedule.startTime}
+            name="startTime"
+            value={currentSchedule.startTime || ""}
             onChange={onChangeSchedule}
             className="PCcalendarEdit_time_input"
           />
-
           <span>~</span>
-
           <input
             type="time"
-            name="end-time"
-            id="endTime"
-            value={schedule.endTime}
+            name="endTime"
+            value={currentSchedule.endTime || ""}
             onChange={onChangeSchedule}
             className="PCcalendarEdit_time_input"
           />
         </div>
       </div>
 
-      <label htmlFor="color" className="PCcalendarEdit_color">
-        Color
-      </label>
-      <select name="color" id="color" className="PCcalendarEdit_color_select" onChange={handleColorChange}>
+      <label htmlFor="boxcolor" className="PCcalendarEdit_color">Color</label>
+      <select
+        name="boxcolor"
+        className="PCcalendarEdit_color_select"
+        value={currentSchedule.boxcolor}
+        onChange={handleColorChange}
+      >
         <option value="Black">Black</option>
         <option value="Red">Red</option>
         <option value="Orange">Orange</option>
@@ -98,26 +95,20 @@ const PCcalendarEdit = ({ schedule, setSchedule, handleSave, handleDelete }) => 
         <option value="Purple">Purple</option>
       </select>
 
-      <label htmlFor="note" className="PCcalendarEdit_note">
-        Note
-      </label>
+      <label htmlFor="note" className="PCcalendarEdit_note">Note</label>
       <textarea
         name="note"
-        id="note"
-        value={schedule.note}
+        value={currentSchedule.note || ""}
         onChange={onChangeSchedule}
         className="PCcalendarEdit_note_textarea"
       ></textarea>
 
-      <label htmlFor="location" className="PCcalendarEdit_location">
-        Location
-      </label>
-
+      <label htmlFor="location" className="PCcalendarEdit_location">Location</label>
       <input
-        id="location"
         type="text"
         className="PCcalendarEdit_location_input"
-        placeholder={schedule.location}
+        placeholder="Location"
+        value={currentSchedule.location || ""}
         readOnly
       />
 
