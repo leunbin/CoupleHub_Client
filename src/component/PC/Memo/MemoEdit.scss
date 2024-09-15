@@ -16,8 +16,8 @@
 
 .MemoEdit_save,
 .MemoEdit_priority {
-  display: flex;           
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   border: none;
   background: transparent;
@@ -42,7 +42,6 @@
   opacity: 0.8;
 }
 
-
 .MemoEdit_save {
   color: #4caf50;
 }
@@ -52,7 +51,7 @@
   transition: color 0.3s;
 
   &.active {
-    color: #FFDC3C;
+    color: #ffdc3c;
   }
 }
 
@@ -89,8 +88,8 @@
 
 .MemoEdit_calendar {
   position: relative;
-  display: flex;      
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   border: none;
   background: transparent;
@@ -103,7 +102,7 @@
   border-radius: 4px;
 }
 
-.MemoList_deadline_input{
+.MemoList_deadline_input {
   flex: 1;
   border: none;
   padding: 0.5rem;
@@ -147,16 +146,16 @@
   cursor: not-allowed;
 }
 
-.MemoEdit_deleteTag{
+.MemoEdit_deleteTag {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
 .MemoEidt_deleteBtn {
-  color:#bebebe;     
-  display: flex;           
-  align-items: center; 
+  color: #bebebe;
+  display: flex;
+  align-items: center;
   justify-content: center;
   border: none;
   background: transparent;
@@ -168,6 +167,6 @@
   box-sizing: border-box;
 
   &.active {
-    color:#FF3232;
+    color: #ff3232;
   }
 }

@@ -21,18 +21,16 @@ const Weekplan = () => {
   }, []);
 
   return (
-    <Link to="/calendar">
-      <div className="Weekplan_root">
-        <div className="Weekplan_week">
-          {weekDays.map((day, index) => (
-            <div key={index} className="Weekplan_content">
-              <div className="Weekplan_day">{day}</div>
-              <div className="Weekplan_day_schedule">schedule</div>
-            </div>
-          ))}
-        </div>
+    <div className="Weekplan_root">
+      <div className="Weekplan_week">
+        {weekDays.map((day, index) => (
+          <div key={index} className="Weekplan_content">
+            <div className="Weekplan_day">{day}</div>
+            <div className="Weekplan_day_schedule">schedule</div>
+          </div>
+        ))}
       </div>
-    </Link>
+    </div>
   );
 };
 

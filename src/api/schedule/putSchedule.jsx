@@ -1,19 +1,18 @@
 import axios from 'axios';
 
-const putMemo = async(id, memoData) => {
+const putSchedule = async(id, scheduleData) => {
   const baseUrl = process.env.REACT_APP_SERVER_URL;
-  console.log(memoData)
   try{
-    const res= await axios.put(`${baseUrl}/api/memo/${id}`, memoData);
+    const res= await axios.put(`${baseUrl}/api/schedule/${id}`, scheduleData);
     return res.data.data;
   } catch (error) {
     console.log({
       success: false,
-      message: "Error updating memo data😢:",
+      message: "Error updating schedule data😢:",
       error,
     });
     throw error;
   }
 }
 
-export default putMemo;
+export default putSchedule;

@@ -7,11 +7,15 @@
 }
 
 .custom-tile {
+  font-family: "Do Hyeon", sans-serif;
   width: 100%;
   height: 160px;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  gap: 0.2rem;
+  overflow-y:auto;
 }
 
 .react-calendar__navigation button {
@@ -40,7 +44,7 @@
 
 .Orange {
   background-color: #ffa01e;
-  color: black;
+  color: white;
 }
 
 .Green {

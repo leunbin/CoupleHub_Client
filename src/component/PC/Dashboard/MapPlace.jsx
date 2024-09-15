@@ -11,23 +11,21 @@ const MapPlace = () => {
   const today = new Date();
 
   return (
-    <Link to="/map">
-      <div className="MapPlace_root">
-        <div className="MapPlace_day">
-          <FontAwesomeIcon icon={faCalendarDay} />
-          <span>
-            {today.getMonth() + 1}월 {today.getDate()}일
-          </span>
-        </div>
-        <div className="MapPlace_info">
-          <div className="MapPlace_info_name">
-            <FontAwesomeIcon icon={faLocationDot} /> place name
-          </div>
-
-          <div className="MapPlace_info_address">place address</div>
-        </div>
+    <div className="MapPlace_root">
+      <div className="MapPlace_day">
+        <FontAwesomeIcon icon={faCalendarDay} />
+        <span>
+          {today.getMonth() + 1}월 {today.getDate()}일
+        </span>
       </div>
-    </Link>
+      <div className="MapPlace_info">
+        <div className="MapPlace_info_name">
+          <FontAwesomeIcon icon={faLocationDot} /> place name
+        </div>
+
+        <div className="MapPlace_info_address">place address</div>
+      </div>
+    </div>
   );
 };
 

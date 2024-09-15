@@ -37,8 +37,6 @@ const PCMemo = ({ socket }) => {
     e.preventDefault();
     try {
       if (memo._id) {
-        console.log(memo._id);
-        console.log(memo);
         const data = await putMemo(memo._id, memo);
         setMemo((prevMemo) => ({
           ...prevMemo,
@@ -71,7 +69,6 @@ const PCMemo = ({ socket }) => {
   const handleDelete = async () => {
     try {
       if (memo._id) {
-        console.log(memo._id)
         await deleteMemo(memo._id);
         setMemo({
           title: "",
