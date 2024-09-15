@@ -8,7 +8,7 @@ const fetchUser = async (token) => {
         Authorization: `Bearer ${token}`
       }
     });
-
+    console.log(res.data.data)
     return res.data.data;
   } catch (error) {
     console.log({

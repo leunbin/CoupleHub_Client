@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MemoModal.scss";
 import fetchMemoByDuedate from "../../../api/memo/fetchMemoByDuedate";
+import { useSelector } from "react-redux";
 
 const MemoModal = () => {
   const [memos, setMemos] = useState([]);
@@ -8,14 +9,14 @@ const MemoModal = () => {
 
   const today = new Date();
   const date = today.toLocaleDateString();
-  const name = JSON.parse(localStorage.getItem("user-info")).name;
+  const user = useSelector((state) => state.user);
 
   const getMemo = async (date) => {
     try {
       const result = await fetchMemoByDuedate(date);
       setMemos(result);
       const initialCheckedItems = result
-        .filter((memo) => memo.type === "Checklist" && memo.author === name)
+        .filter((memo) => memo.type === "Checklist" && memo.author === user.name)
         .reduce((acc, memo) => {
           memo.content.forEach((item, index) => {
             acc[`${memo._id}_${index}`] = item.completed;
@@ -46,7 +47,7 @@ const MemoModal = () => {
           <div className="MemoModa_noMemos">No schedules for today 😢</div>
         ) : (
           memos
-            .filter((memo) => memo.author === name)
+            .filter((memo) => memo.author === user.name)
             .map((memo) => (
               <div key={memo._id} className="MemoModal_memoItem">
                 <h3 className="MemoModal_memoTitle">{memo.title}</h3>

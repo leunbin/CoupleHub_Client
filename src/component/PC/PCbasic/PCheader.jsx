@@ -16,7 +16,7 @@ const PCheader = () => {
 
   const location = useLocation();
   const path = location.pathname;
-  const name = JSON.parse(localStorage.getItem("user-info")).name;
+  const user = useSelector((state) => state.user);
 
   const getTitle = () => {
     switch (path) {
@@ -50,7 +50,7 @@ const PCheader = () => {
           <div className="date">
             <div className="content">
               <span>{today}</span>
-              <span className="PCheader_user">hi, {name}</span>
+              <span className="PCheader_user">hi, {user.name}</span>
             </div>
             <Weather />
             <div className="couple_date">
