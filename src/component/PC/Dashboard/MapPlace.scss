@@ -12,9 +12,8 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.MapPlace_root:hover {
-  background-color: #ffffff; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.faThumbTack{
+  color: #ff9800;
 }
 
 .MapPlace_day {
@@ -35,6 +34,8 @@
 .MapPlace_info {
   width: 100%;
   padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .MapPlace_info_name {
@@ -51,6 +52,13 @@
 .MapPlace_info_address {
   font-size: 0.9rem; 
   color: #666; 
+}
+
+.MapPlace_item{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 @media screen and (max-height: 800px) {

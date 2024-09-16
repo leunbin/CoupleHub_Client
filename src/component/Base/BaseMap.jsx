@@ -5,13 +5,13 @@ import useGeolocation from "../../hook/useGeolocation";
 import { useLocation } from "react-router-dom";
 import "./BaseMap.scss";
 
-const BaseMap = ({ input, setPlace, setSchedule, schedule, place }) => {
+const BaseMap = ({ input, setPlace, dateSchedules }) => {
   useKakaoLoader();
   const userLocation = useGeolocation();
   const location = useLocation();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState(null);
-  const coordinates = userLocation.coordinates; // 유저의 위치 데이터
+  const coordinates = userLocation.coordinates;
   const { kakao } = window;
   const Geocoder = new kakao.maps.services.Geocoder();
   const Place = new kakao.maps.services.Places();
@@ -55,7 +55,6 @@ const BaseMap = ({ input, setPlace, setSchedule, schedule, place }) => {
                 content: item.address_name,
               };
             });
-            console.log(data);
             setMarkers(markers);
             map.setBounds(bounds);
           }
@@ -63,6 +62,34 @@ const BaseMap = ({ input, setPlace, setSchedule, schedule, place }) => {
       }
     });
   }, [map, input, location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname === "/dashboard") {
+      const bounds = new kakao.maps.LatLngBounds();
+
+      dateSchedules?.forEach((item) => {
+        Geocoder.addressSearch(item.location, (data, status) => {
+          if (status === kakao.maps.services.Status.OK) {
+            const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
+
+            const marker = {
+              position: { lat: coords.getLat(), lng: coords.getLng() },
+              content: data[0].address_name,
+            };
+
+            setMarkers((prevMarkers) => [...prevMarkers, marker]);
+            bounds.extend(coords);
+            map.setBounds(bounds);
+          }
+        });
+      });
+
+    }
+  }, [dateSchedules, location.pathname]);
+
+  useEffect(() => {
+    console.log(dateSchedules);
+  }, [dateSchedules]);
 
   return (
     <div className="BaseMap_root">
