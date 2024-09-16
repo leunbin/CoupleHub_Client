@@ -93,7 +93,7 @@ const MemoContent = ({ memo, setMemo }) => {
           <div className={`MemoContent_deadline_content ${
               memo.deadline ? "" : "type"
             }`}>
-            {memo.dueDate === ''
+            {memo.dueDate === '' || memo.dueDate === null
               ? "비어 있음"
               : new Date(memo.dueDate).toLocaleDateString()}
           </div>
