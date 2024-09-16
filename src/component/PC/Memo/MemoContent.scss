@@ -10,7 +10,7 @@
 .MemoContent_info {
   position: relative;
   width: 100%;
-  height: 20vh;
+  height: 25vh;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
@@ -98,7 +98,7 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: calc(100vh - 40vh);
+  height: calc(100vh - 50vh);
   box-sizing: border-box;
   padding-right: 0.5rem;
 
