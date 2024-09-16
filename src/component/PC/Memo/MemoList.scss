@@ -37,7 +37,11 @@
   align-items: center;
   &:hover {
     cursor: pointer;
-    background-color: #bebebe;
+    background-color: #dcdcdc;
+  }
+
+  &.active {
+    background-color: #dcdcdc;
   }
 }
 
@@ -57,7 +61,7 @@
   white-space: nowrap;
   font-size: 0.5;
   font-weight: 400;
-  color: #b4b4b4;
+  color: #3c3c3c;
   display: flex;
   gap: 0.5rem;
 }

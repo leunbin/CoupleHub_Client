@@ -106,7 +106,7 @@ const PCMemo = ({ socket }) => {
         <PCheader />
         <div className="PCMemo_main">
           <div className="PCMemo_list">
-            <MemoList memos={memos} clickMemo={clickMemo} />
+            <MemoList memos={memos} clickMemo={clickMemo} memo={memo} />
           </div>
           <div className="PCMemo_memo">
             <MemoContent memo={memo} setMemo={setMemo} />

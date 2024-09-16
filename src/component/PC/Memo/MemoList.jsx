@@ -7,29 +7,29 @@ import {
   faNoteSticky,
 } from "@fortawesome/free-solid-svg-icons";
 
-const MemoList = ({ memos, clickMemo }) => {
+const MemoList = ({ memos, clickMemo, memo }) => {
   const sortedMemos = memos.sort((a, b) => b.priority - a.priority);
   return (
     <div className="List_root">
-      {sortedMemos.map((memo) => (
+      {sortedMemos.map((item) => (
         <div
-          className="List_item"
-          key={memo._id}
-          onClick={() => clickMemo(memo._id)}
+          className={`List_item ${item._id === memo._id ? "active" : ""}`}
+          key={item._id}
+          onClick={() => clickMemo(item._id)}
         >
           <div className="MemoList_name">
-            <div className={`List_item_type ${memo.type}`}>
-              {memo.type === "Checklist" ? (
+            <div className={`List_item_type ${item.type}`}>
+              {item.type === "Checklist" ? (
                 <FontAwesomeIcon icon={faCircleCheck} />
               ) : (
                 <FontAwesomeIcon icon={faNoteSticky} />
               )}
             </div>
-            <div className="List_item_title">{memo.title}</div>
+            <div className="List_item_title">{item.title}</div>
           </div>
           <div className="List_item_info">
-            {new Date(memo.createdDate).toLocaleDateString()}
-            {memo.priority && (
+            {new Date(item.createdDate).toLocaleDateString()}
+            {item.priority && (
               <FontAwesomeIcon icon={faStar} className="List_item_crown" />
             )}
           </div>
