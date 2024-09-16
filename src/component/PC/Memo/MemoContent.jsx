@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./MemoContent.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faHourglass2,
+  faUserCircle,
+  faTrashAlt
+} from "@fortawesome/free-regular-svg-icons";
 
 const MemoContent = ({ memo, setMemo }) => {
   const [items, setItems] = useState(memo.content || []);
@@ -46,8 +52,13 @@ const MemoContent = ({ memo, setMemo }) => {
   return (
     <div className="MemoContent_root">
       <div className="MemoContent_info">
+        <div className="MemoContent_title_content">
+          {memo.title === "" ? "제 목" : memo.title}
+        </div>
         <div className="MemoContent_createdDate">
-          <span className="MemoContent_createdDate_title">CreatedDate</span>
+          <span className="MemoContent_createdDate_title">
+            <FontAwesomeIcon icon={faClock} /> 날짜
+          </span>
           <div className="MemoContent_createdDate_content">
             {memo.createdDate &&
               new Date(memo.createdDate).toLocaleDateString()}
@@ -55,30 +66,38 @@ const MemoContent = ({ memo, setMemo }) => {
         </div>
 
         <div className="MemoContent_author">
-          <span className="MemoContent_author_title">Author</span>
+          <span className="MemoContent_author_title">
+            {" "}
+            <FontAwesomeIcon icon={faUserCircle} /> 작성자
+          </span>
           <div className="MemoContent_author_content">{memo.author}</div>
         </div>
 
-        <div className="MemoContent_title">
-          <span className="MemoContent_title_title">Title</span>
-          <div className="MemoContent_title_content">{memo.title}</div>
-        </div>
-
         <div className="MemoContent_type">
-          <span className="MemoContent_type_title">Type</span>
-          {memo.type !== "" ? (
-            <div className="MemoContent_type_content">{memo.type}</div>
-          ) : null}
+          <span className="MemoContent_type_title">
+            <FontAwesomeIcon icon={faHashtag} /> 타입
+          </span>
+          <div
+            className={`MemoContent_type_content ${
+              memo.type ? "" : "type"
+            }`}
+          >
+            {memo.type ? memo.type : "비어 있음"}
+          </div>
         </div>
 
-        {memo.dueDate ? (
-          <div className="MemoContent_deadline">
-            <span className="MemoContent_deadline_title">deadline</span>
-            <div className="MemoContent_deadline_content">
-              {new Date(memo.dueDate).toLocaleDateString()}
-            </div>
+        <div className="MemoContent_deadline">
+          <span className="MemoContent_deadline_title">
+            <FontAwesomeIcon icon={faHourglass2} /> deadline
+          </span>
+          <div className={`MemoContent_deadline_content ${
+              memo.deadline ? "" : "type"
+            }`}>
+            {memo.dueDate === ''
+              ? "비어 있음"
+              : new Date(memo.dueDate).toLocaleDateString()}
           </div>
-        ) : null}
+        </div>
       </div>
 
       <div className="MemoContent_note_content">
@@ -93,11 +112,11 @@ const MemoContent = ({ memo, setMemo }) => {
         )}
         {memo.type === "Checklist" && (
           <>
-            <textarea
+            <input
               placeholder="여기에 체크리스트 항목을 추가하세요..."
               onKeyDown={handleAddItem}
               className="CheckboxList_input"
-            ></textarea>
+            ></input>
 
             <div className="CheckboxList_items">
               {items.map((item, index) => (

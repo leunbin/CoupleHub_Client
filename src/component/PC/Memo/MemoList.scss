@@ -1,33 +1,49 @@
-.List_root{
+.List_root {
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   padding: 0.2rem;
   border-radius: 3px;
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #ffdce1;
+      border: 2px solid #ffdce1;
+      border-radius: 12px;
+    }
+  }
 }
 
 .List_item {
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   box-sizing: border-box;
   transition: background-color 0.3s, box-shadow 0.3s;
-  background-image: linear-gradient(to right,#FFE3EE,#ffffff);
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   align-items: center;
-  &:hover{
+  &:hover {
     cursor: pointer;
+    background-color: #bebebe;
   }
 }
 
-.List_item:hover {
-  background-color: #ffffff; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.MemoList_name {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .List_item_title {
@@ -37,14 +53,13 @@
 
 .List_item_info {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   white-space: nowrap;
-}
-
-.List_item_date{
   font-size: 0.5;
   font-weight: 400;
-  color:#b4b4b4;
+  color: #b4b4b4;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .List_item_type {
@@ -53,7 +68,7 @@
   gap: 0.2rem;
 }
 
-.List_item_crown{
+.List_item_crown {
   color: #ff9800;
 }
 
@@ -63,15 +78,4 @@
 
 .List_item_type.Note {
   color: #28a745;
-}
-
-.List_root::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 1rem;
-}
-
-.List_root::-webkit-scrollbar-thumb {
-  background-color: #FFDCE1;
-  border: 2px solid #FFDCE1;
-  border-radius: 12px;
 }

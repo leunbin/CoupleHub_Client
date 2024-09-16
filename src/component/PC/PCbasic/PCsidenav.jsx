@@ -3,10 +3,10 @@ import {
   faCalendar,
   faGauge,
   faList,
-  faMap,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React from "react";
 import "./PCsidenav.scss";
 import { Link } from "react-router-dom";
 import PCmenu from "./PCmenu";
@@ -21,6 +21,8 @@ const PCsidenav = ({ children }) => {
         <PCmenu setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
       ) : (
         <div className="sidenav_button_bar">
+          <div className="sidenav_button_tag">
+
           <button
             className="sidenav_button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -45,6 +47,11 @@ const PCsidenav = ({ children }) => {
               <FontAwesomeIcon icon={faList} />
             </button>
           </Link>
+          </div>
+
+          <button className="sidenav_logout">
+            <FontAwesomeIcon icon={faSignOutAlt} />
+          </button>
         </div>
       )}
       <div className={`sidenav_main ${isMenuOpen ? "isMenuOpen" : ""}`}>

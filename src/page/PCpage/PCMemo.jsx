@@ -113,6 +113,7 @@ const PCMemo = ({ socket }) => {
           </div>
           <div className="PCMemo_edit">
             <MemoEdit
+            name={name}
               memo={memo}
               setMemo={setMemo}
               handleSave={handleSave}

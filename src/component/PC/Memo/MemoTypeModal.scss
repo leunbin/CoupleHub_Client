@@ -1,0 +1,40 @@
+.MemoTypeModal_root {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 200px;
+  z-index: 1000;
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    background-color: #ffffff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.MemoType_None:hover {
+      background-color: #e0e0e0;
+    }
+
+    &.MemoType_Checklist:hover {
+      background-color: #d1f7d1;
+    }
+
+    &.MemoType_Note:hover {
+      background-color: #d1e0f7;
+    }
+  }
+}

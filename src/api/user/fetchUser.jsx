@@ -2,13 +2,12 @@ import axios from "axios";
 
 const fetchUser = async (token) => {
   const baseUrl = process.env.REACT_APP_SERVER_URL;
-  try{
-    const res = await axios.get(`${baseUrl}/api/user`,{
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
+  try {
+    const res = await axios.get(`${baseUrl}/api/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
-    console.log(res.data.data)
     return res.data.data;
   } catch (error) {
     console.log({
@@ -18,6 +17,6 @@ const fetchUser = async (token) => {
     });
     throw error;
   }
-}
+};
 
 export default fetchUser;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LoginModal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import postLogin from "../../api/auth/postLogin";
 import {setUser} from "../../store/userSlice";
@@ -12,6 +12,7 @@ const LoginModal = () => {
   const [name, setName] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
@@ -38,6 +39,7 @@ const LoginModal = () => {
 
       localStorage.setItem('user-info', JSON.stringify(userData));
 
+      navigate('/dashboard');
     } catch (error) {
       console.error('로그인 실패:', error);
     }
@@ -77,11 +79,9 @@ const LoginModal = () => {
             </div>
           </div>
 
-          <Link to="/dashboard">
             <button className="login__button" onClick={handleLogin}>
               LOGIN
             </button>
-          </Link>
         </div>
         {/* <div className="login__footer">
           <span>Don't have an account?</span>

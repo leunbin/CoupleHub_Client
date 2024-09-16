@@ -10,40 +10,51 @@
 .MemoContent_info {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 20vh;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
   box-sizing: border-box;
-  background-image: linear-gradient(to bottom, #FFE3EE, #ffffff);
+  border-bottom: solid 1px #b4b4b4;
+  margin-bottom: 0.5rem;
 }
 
-.MemoContent_createdDate, 
-.MemoContent_author, 
-.MemoContent_title, 
-.MemoContent_type, 
+.MemoContent_title_content {
+  height: 3rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.MemoContent_createdDate,
+.MemoContent_author,
+.MemoContent_type,
 .MemoContent_deadline {
   display: flex;
   margin-bottom: 0.5rem;
-  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .MemoContent_createdDate_title,
 .MemoContent_author_title,
-.MemoContent_title_title,
 .MemoContent_type_title,
 .MemoContent_deadline_title {
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 20px;
+  font-weight: 400;
+  color: #b4b4b4;
+  width: 10rem;
 }
 
 .MemoContent_createdDate_content,
 .MemoContent_author_content,
-.MemoContent_title_content,
 .MemoContent_type_content,
 .MemoContent_deadline_content {
-  font-size: 1.5rem;
-  color: #555;
+  font-size: 20px;
+  color: #111111;
+
+  &.type {
+    color: #b4b4b4;
+  }
 }
 
 .MemoContent_note_content {
@@ -59,8 +70,13 @@
   padding: 0.5rem;
   border-radius: 4px;
   resize: vertical;
-  font-size: 1.5rem;
+  font-size: 20px;
   box-sizing: border-box;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .CheckboxList_input {
@@ -69,11 +85,39 @@
   border-radius: 4px;
   margin-bottom: 1.5rem;
   box-sizing: border-box;
+  border: 1px solid #ddd;
+  font-size: 20px;
+
+  &:focus {
+    border: 1px solid #007bff;
+    outline: none;
+  }
 }
 
 .CheckboxList_items {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  height: calc(100vh - 40vh);
+  box-sizing: border-box;
+  padding-right: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #ffdce1;
+      border: 2px solid #ffdce1;
+      border-radius: 12px;
+    }
+  }
 }
 
 .CheckboxList_item {
@@ -82,17 +126,13 @@
   align-items: center;
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ddd;
   border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.5rem;
   box-sizing: border-box;
 }
 
 .CheckboxList_item.completed {
   background-color: #f4f4f4;
-  text-decoration: line-through; 
+  text-decoration: line-through;
 }
 
 .CheckboxList_item input[type="checkbox"] {
@@ -103,10 +143,10 @@
   flex: 1;
 }
 
-.CheckboxList_item_delete{
-  color:#FF3232 ;
-  display: flex;           
-  align-items: center; 
+.CheckboxList_item_delete {
+  color: #ff3232;
+  display: flex;
+  align-items: center;
   justify-content: center;
   border: none;
   background: transparent;
@@ -118,4 +158,12 @@
   box-sizing: border-box;
 }
 
+@media screen and (max-height: 800px) {
+  .MemoContent_info {
+    height: 35vh;
+  }
 
+  .CheckboxList_items {
+    height: calc(100vh - 70vh);
+  }
+}

@@ -4,17 +4,18 @@ import {
   faCalendar,
   faGauge,
   faList,
-  faMap,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./PCmenu.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSidebar } from "../../../store/SidebarContext";
 
 const PCmenu = () => {
-  const {isMenuOpen, setIsMenuOpen} = useSidebar();
+  const { setIsMenuOpen} = useSidebar();
   const [isMenuClosing, setIsMenuClosing] = useState(false);
   const outside = useRef(null);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setIsMenuClosing(true);
@@ -22,6 +23,11 @@ const PCmenu = () => {
       setIsMenuOpen(false);
     }, 200);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user-info');
+    navigate('/')
+  }
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -40,6 +46,8 @@ const PCmenu = () => {
       className={`PCmenuRoot ${isMenuClosing ? "slide-out" : "slide-in"}`}
       ref={outside}
     >
+      <div className="PCmenud_btn_tag">
+
       <button onClick={handleClose} className="PCmenu_bars_button">
         <FontAwesomeIcon icon={faBars} />
       </button>
@@ -64,6 +72,11 @@ const PCmenu = () => {
           <span>Memo</span>
         </button>
       </Link>
+      </div>
+      <button className="PCmenu_logout" onClick={handleLogout}>
+        <FontAwesomeIcon icon={faSignOutAlt} />
+        <span>Log out</span>
+      </button>
     </div>
   );
 };

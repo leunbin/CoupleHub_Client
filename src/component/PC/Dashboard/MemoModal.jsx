@@ -4,6 +4,20 @@ import fetchMemoByDuedate from "../../../api/memo/fetchMemoByDuedate";
 import { useSelector } from "react-redux";
 
 const MemoModal = () => {
+  const [name, setName] = useState(null);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("user-info");
+    if (userInfo) {
+      try {
+        const user = JSON.parse(userInfo);
+        setName(user.name);
+      } catch (error) {
+        console.error("Error parsing user-info:", error);
+      }
+    }
+  }, []);
+
   const [memos, setMemos] = useState([]);
   const [checkedItems, setCheckedItems] = useState({});
 
@@ -16,7 +30,7 @@ const MemoModal = () => {
       const result = await fetchMemoByDuedate(date);
       setMemos(result);
       const initialCheckedItems = result
-        .filter((memo) => memo.type === "Checklist" && memo.author === user.name)
+        .filter((memo) => memo.type === "Checklist" && memo.author === name)
         .reduce((acc, memo) => {
           memo.content.forEach((item, index) => {
             acc[`${memo._id}_${index}`] = item.completed;
@@ -44,10 +58,10 @@ const MemoModal = () => {
       <div className="MemoModal_title">Check off your list</div>
       <div className="MemoModal_content">
         {memos.length === 0 ? (
-          <div className="MemoModa_noMemos">No schedules for today 😢</div>
+          <div className="MemoModal_noMemos">No schedules for today 😢</div>
         ) : (
           memos
-            .filter((memo) => memo.author === user.name)
+            .filter((memo) => memo.author === name)
             .map((memo) => (
               <div key={memo._id} className="MemoModal_memoItem">
                 <h3 className="MemoModal_memoTitle">{memo.title}</h3>
