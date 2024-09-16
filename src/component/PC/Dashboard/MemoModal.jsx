@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./MemoModal.scss";
 import fetchMemoByDuedate from "../../../api/memo/fetchMemoByDuedate";
-import { useSelector } from "react-redux";
 
 const MemoModal = () => {
   const [name, setName] = useState(null);
+  const [memos, setMemos] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
+  const [selectedMemoId, setSelectedMemoId] = useState(null);
+
+  const today = new Date();
+  const date = today.toLocaleDateString();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user-info");
@@ -18,26 +23,13 @@ const MemoModal = () => {
     }
   }, []);
 
-  const [memos, setMemos] = useState([]);
-  const [checkedItems, setCheckedItems] = useState({});
-
-  const today = new Date();
-  const date = today.toLocaleDateString();
-  const user = useSelector((state) => state.user);
-
   const getMemo = async (date) => {
     try {
       const result = await fetchMemoByDuedate(date);
-      setMemos(result);
-      const initialCheckedItems = result
-        .filter((memo) => memo.type === "Checklist" && memo.author === name)
-        .reduce((acc, memo) => {
-          memo.content.forEach((item, index) => {
-            acc[`${memo._id}_${index}`] = item.completed;
-          });
-          return acc;
-        }, {});
-      setCheckedItems(initialCheckedItems);
+      const memos = result?.sort(
+        (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+      );
+      setMemos(memos);
     } catch (error) {
       console.log(error);
     }
@@ -49,13 +41,17 @@ const MemoModal = () => {
     setCheckedItems(newCheckedItems);
   };
 
+  const handleTitleClick = (memoId) => {
+    setSelectedMemoId(memoId);
+  };
+
   useEffect(() => {
     getMemo(date);
   }, [date]);
 
   return (
     <div className="MemoModal_root">
-      <div className="MemoModal_title">Check off your list</div>
+      <div className="MemoModal_title">마감 임박 알림 🔔</div>
       <div className="MemoModal_content">
         {memos.length === 0 ? (
           <div className="MemoModal_noMemos">No schedules for today 😢</div>
@@ -64,31 +60,63 @@ const MemoModal = () => {
             .filter((memo) => memo.author === name)
             .map((memo) => (
               <div key={memo._id} className="MemoModal_memoItem">
-                <h3 className="MemoModal_memoTitle">{memo.title}</h3>
-                {memo.type === "Checklist" ? (
-                  <ul className="MemoModal_checklist">
-                    {memo.content.map((item, index) => (
-                      <li
-                        key={index}
-                        className={`CheckboxList_item ${
-                          checkedItems[`${memo._id}_${index}`] ? "completed" : ""
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checkedItems[`${memo._id}_${index}`]}
-                          onChange={() => handleCheckboxChange(memo._id, index)}
-                        />
-                        <span>{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="MemoModal_note">
-                    {memo.content.map((text, index) => (
-                      <p key={index} className="MemoModal_noteText">{text}</p>
-                    ))}
-                  </div>
+                <div
+                  className={`MemoModal_info ${
+                    memo._id === selectedMemoId ? "active" : ""
+                  }`}
+                >
+                  <span
+                    className="MemoModal_memoTitle"
+                    onClick={() => handleTitleClick(memo._id)}
+                  >
+                    {memo.title}
+                  </span>
+                  <span className="MemoModal_memoDueDate">
+                    {Math.ceil(
+                      (new Date(memo.dueDate).getTime() - today.getTime()) /
+                        (1000 * 3600 * 24)
+                    ) === 0
+                      ? "오늘"
+                      : `${Math.ceil(
+                          (new Date(memo.dueDate).getTime() - today.getTime()) /
+                            (1000 * 3600 * 24)
+                        )}일 전`}
+                  </span>
+                </div>
+                {selectedMemoId === memo._id && (
+                  <>
+                    {memo.type === "Checklist" ? (
+                      <ul className="MemoModal_checklist">
+                        {memo.content.map((item, index) => (
+                          <li
+                            key={index}
+                            className={`CheckboxList_item ${
+                              checkedItems[`${memo._id}_${index}`]
+                                ? "completed"
+                                : ""
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={checkedItems[`${memo._id}_${index}`]}
+                              onChange={() =>
+                                handleCheckboxChange(memo._id, index)
+                              }
+                            />
+                            <span>{item.text}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="MemoModal_note">
+                        {memo.content.map((text, index) => (
+                          <p key={index} className="MemoModal_noteText">
+                            {text}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             ))

@@ -1,4 +1,4 @@
-.MemoModal_root{
+.MemoModal_root {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -12,14 +12,13 @@
   font-size: 1.75rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #333;
+  color: #003366;
   text-align: center;
 }
 
 .MemoModal_content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .MemoModal_noMemos {
@@ -28,18 +27,34 @@
   text-align: center;
 }
 
-.MemoModal_memoItem {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.MemoModal_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: #bebebe;
+    cursor: pointer;
+  }
+
+  &.active {
+    background-color: #bebebe;
+  }
 }
 
 .MemoModal_memoTitle {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #555;
+  color: #111111;
+}
+
+.MemoModal_memoDueDate {
+  color: #464646;
 }
 
 .MemoModal_checklist {
@@ -57,10 +72,6 @@
   color: #444;
 }
 
-.CheckboxList_item:last-child {
-  border-bottom: none;
-}
-
 .CheckboxList_item.completed span {
   text-decoration: line-through;
   color: #888;
@@ -74,8 +85,7 @@
 .MemoModal_note {
   padding: 1rem;
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-bottom: 1px solid #ddd;
 }
 
 .MemoModal_noteText {
@@ -90,7 +100,7 @@
 }
 
 .MemoModal_root::-webkit-scrollbar-thumb {
-  background-color: #FFDCE1;
-  border: 2px solid #FFDCE1;
+  background-color: #ffdce1;
+  border: 2px solid #ffdce1;
   border-radius: 12px;
 }

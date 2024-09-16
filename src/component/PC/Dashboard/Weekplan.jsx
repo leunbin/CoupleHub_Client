@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Weekplan.scss";
 import fetchSchedulesByDate from "../../../api/schedule/fetchSchedulesByDate";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Weekplan = () => {
   const [weekDays, setWeekDays] = useState([
@@ -20,7 +22,7 @@ const Weekplan = () => {
       nextDay.setDate(today.getDate() + i);
       const schedules = await fetchSchedulesByDate(nextDay.toLocaleDateString());
       daysArray.push({
-        day: `${nextDay.getMonth() + 1}월 ${nextDay.getDate()}일`, // 'MM월 DD일' 형식
+        day: `${nextDay.getMonth() + 1}월 ${nextDay.getDate()}일`,
         schedules: schedules
       });
     };
@@ -42,8 +44,8 @@ const Weekplan = () => {
             <div className="Weekplan_day">{item.day}</div>
             <div className="Weekplan_day_schedule">
               {item.schedules.length > 0 ? item.schedules.map((item) => (
-                <span className="Weekplan_item_event">{item.event}</span>
-              )) : <span className="Weekplan_no_events">No events 😢</span>}
+                <span className="Weekplan_item_event"><FontAwesomeIcon icon={faCheck} className="Weekplan_check" /> {item.event}</span>
+              )) : <span className="Weekplan_no_events">일정이 없어요 😊</span>}
             </div>
           </div>
         ))}
