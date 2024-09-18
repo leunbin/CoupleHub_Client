@@ -21,9 +21,13 @@ const PCCalendar = ({ socket }) => {
     location: "",
     note: "",
     boxcolor: "",
-  });
+  }); // 생성하는 스케줄
+  const [input, setInput] = useState(""); // 지도에 보내는 검색
+  const [localInput, setLocalInput] = useState('');// 검색창에 들어가는 input
 
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
+
+
+  const [selectedSchedule, setSelectedSchedule] = useState(null); // 수정하는 스케줄
 
   const [schedules, setSchedules] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -52,6 +56,7 @@ const PCCalendar = ({ socket }) => {
     try {
       const date = selectedDate.toLocaleDateString();
       if (schedule._id) {
+        console.log('수정', schedule)
         const data = await putSchedule(schedule._id, schedule);
         setSchedule((pre) => ({
           ...pre,
@@ -59,6 +64,7 @@ const PCCalendar = ({ socket }) => {
         }));
       } else {
         const data = await postSchedule(schedule);
+        console.log('저장', schedule)
         setSchedule((pre) => ({
           ...pre,
           ...data,
@@ -121,7 +127,7 @@ const PCCalendar = ({ socket }) => {
         <PCheader />
         <div className="PCcalendar_main">
           <div className="PCcalendar_schedule">
-            <PCschedule dateSchedules={dateSchedules} setSelectedSchedule={setSelectedSchedule} />
+            <PCschedule dateSchedules={dateSchedules} setSelectedSchedule={setSelectedSchedule} selectedSchedule={selectedSchedule} />
           </div>
           <div className="PCcalendar_calendar">
             <PCcalendarContent
@@ -130,6 +136,11 @@ const PCCalendar = ({ socket }) => {
               schedules={schedules}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
+              selectedSchedule={selectedSchedule}
+              setSelectedSchedule={setSelectedSchedule}
+              setInput={setInput}
+              input={input}
+              setLocalInput={setLocalInput}
             />
           </div>
           <div className="PCcalendar_edit">
@@ -139,6 +150,11 @@ const PCCalendar = ({ socket }) => {
               handleSave={handleSave}
               handleDelete={handleDelete}
               selectedSchedule={selectedSchedule}
+              setSelectedSchedule={setSelectedSchedule}
+              input={input}
+              setInput={setInput}
+              localInput={localInput}
+              setLocalInput={setLocalInput}
             />
           </div>
         </div>

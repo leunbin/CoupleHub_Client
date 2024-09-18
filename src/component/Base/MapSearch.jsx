@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import "./MapSearch.scss";
 
-const MapSearch = ({ input, setInput }) => {
-  const [localInput, setLocalInput] = useState('');
+const MapSearch = ({ input, setInput, localInput, setLocalInput }) => {
 
   const handleInputChange = (e) => {
     setLocalInput(e.target.value);

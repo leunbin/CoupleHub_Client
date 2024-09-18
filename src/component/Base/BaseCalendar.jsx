@@ -3,7 +3,17 @@ import Calendar from "react-calendar";
 import "./BaseCalendar.scss";
 import "react-calendar/dist/Calendar.css";
 
-const BaseCalendar = ({ schedule, setSchedule, schedules, selectedDate, setSelectedDate }) => {
+const BaseCalendar = ({
+  schedule,
+  setSchedule,
+  schedules,
+  selectedDate,
+  setSelectedDate,
+  setSelectedSchedule,
+  selectedSchedule,
+  input,
+  setLocalInput,
+}) => {
   const [infoArray, setInfoArray] = useState([]);
 
   const onChangeDate = (value) => {
@@ -14,12 +24,39 @@ const BaseCalendar = ({ schedule, setSchedule, schedules, selectedDate, setSelec
     });
   };
 
+  useEffect(() => {
+    if (selectedSchedule) {
+      setSchedule(selectedSchedule);
+    }
+  }, [selectedSchedule, schedules]);
+
+  useEffect(() => {
+    if (schedule._id) {
+      setSchedule({
+        date: "",
+        startTime: "",
+        endTime: "",
+        event: "",
+        location: "",
+        note: "",
+        boxcolor: "",
+      });
+    }
+    setLocalInput("");
+  }, [selectedDate]);
+
+  useEffect(() => {
+    console.log(input);
+  }, [selectedDate]);
+
   const handleTileContent = ({ date, view }) => {
     if (view === "month") {
       const matchedSchedules = infoArray.filter(
         (item) =>
-          new Date(item.date).toLocaleDateString() === date.toLocaleDateString()
+          new Date(item.date).toLocaleDateString() ===
+            date.toLocaleDateString() && item._id !== selectedSchedule?._id
       );
+
       return (
         <>
           {matchedSchedules.length > 0 &&
@@ -29,20 +66,16 @@ const BaseCalendar = ({ schedule, setSchedule, schedules, selectedDate, setSelec
               </div>
             ))}
           {date.toLocaleString() === new Date(schedule.date).toLocaleString() &&
-          schedule.event ? (
-            <div className={`scheduleTile ${schedule.boxcolor}`}>
-              {schedule.event}
-            </div>
-          ) : null}
+            schedule.event && (
+              <div className={`scheduleTile ${schedule.boxcolor}`}>
+                {schedule.event}
+              </div>
+            )}
         </>
       );
     }
     return null;
   };
-
-  useEffect(() => {
-    console.log(infoArray);
-  }, [schedule]);
 
   useEffect(() => {
     setInfoArray([...schedules]);

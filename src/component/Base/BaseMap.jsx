@@ -5,7 +5,7 @@ import useGeolocation from "../../hook/useGeolocation";
 import { useLocation } from "react-router-dom";
 import "./BaseMap.scss";
 
-const BaseMap = ({ input, setPlace, dateSchedules }) => {
+const BaseMap = ({ input, setPlace, place, dateSchedules, localInput }) => {
   useKakaoLoader();
   const userLocation = useGeolocation();
   const location = useLocation();
@@ -18,6 +18,44 @@ const BaseMap = ({ input, setPlace, dateSchedules }) => {
 
   useEffect(() => {
     if (!map || !input) return;
+
+    if (place && !input && location.pathname === "/calendar") {
+      Geocoder.addressSearch(place, (status, data) => {
+        if (status === kakao.maps.services.Status.OK) {
+          const bounds = new kakao.maps.LatLngBounds();
+          const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
+          const marker = {
+            position: { lat: coords.getLat(), lng: coords.getLng() },
+            content: data[0].address_name,
+          };
+
+          setMarkers((prevMarkers) => [...prevMarkers, marker]);
+          bounds.extend(coords);
+          map.setBounds(bounds);
+        } else if (data.length === 0) {
+          Place.keywordSearch(input, (data, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              const bounds = new kakao.maps.LatLngBounds();
+
+              const markers = data.map((item) => {
+                const coords = new kakao.maps.LatLng(item.y, item.x);
+                bounds.extend(coords);
+
+                return {
+                  position: {
+                    lat: coords.getLat(),
+                    lng: coords.getLng(),
+                  },
+                  content: item.address_name,
+                };
+              });
+              setMarkers(markers);
+              map.setBounds(bounds);
+            }
+          });
+        }
+      });
+    }
 
     Geocoder.addressSearch(input, (data, status) => {
       if (
@@ -61,7 +99,7 @@ const BaseMap = ({ input, setPlace, dateSchedules }) => {
         });
       }
     });
-  }, [map, input, location.pathname]);
+  }, [map, input, location.pathname, place]);
 
   useEffect(() => {
     if (location.pathname === "/dashboard") {
@@ -83,7 +121,6 @@ const BaseMap = ({ input, setPlace, dateSchedules }) => {
           }
         });
       });
-
     }
   }, [dateSchedules, location.pathname]);
 

@@ -8,12 +8,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import "./PCsidenav.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PCmenu from "./PCmenu";
 import { useSidebar } from "../../../store/SidebarContext";
 
 const PCsidenav = ({ children }) => {
   const { isMenuOpen, setIsMenuOpen } = useSidebar();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('user-info');
+    navigate('/')
+  }
 
   return (
     <div className="sidenav_root">
@@ -49,7 +55,7 @@ const PCsidenav = ({ children }) => {
           </Link>
           </div>
 
-          <button className="sidenav_logout">
+          <button className="sidenav_logout" onClick={handleLogout}>
             <FontAwesomeIcon icon={faSignOutAlt} />
           </button>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./PCschedule.scss";
 import fetchScheduleById from "../../../api/schedule/fetchScheduleById";
 
-const PCschedule = ({ dateSchedules, setSelectedSchedule }) => {
+const PCschedule = ({ dateSchedules, setSelectedSchedule, selectedSchedule }) => {
   const handleScheduleItem = async (id) => {
     const result = await fetchScheduleById(id);
     setSelectedSchedule(result)
@@ -14,7 +14,7 @@ const PCschedule = ({ dateSchedules, setSelectedSchedule }) => {
       <div className="PCschedule_content">
         {dateSchedules?.length > 0 ? (
           dateSchedules.map((schedule) => (
-            <div className="PCschedule_item" key={schedule.id} onClick={() => handleScheduleItem(schedule._id)}>
+            <div className={`PCschedule_item ${schedule._id === selectedSchedule?._id ? "active" : ""}`} key={schedule.id} onClick={() => handleScheduleItem(schedule._id)}>
               <div className="PCschedule_item_event">{schedule.event}</div>
               <div className="PCschedule_item_time">
                 {schedule.startTime === "" && schedule.endTime === ""
