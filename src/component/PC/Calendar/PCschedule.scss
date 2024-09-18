@@ -7,6 +7,7 @@
 }
 
 .PCschedule_title {
+  margin-top: 1rem;
   width: 100%;
   height: 2rem;
   display: flex;
@@ -67,6 +68,31 @@
 .PCschedule_item_event {
   font-size: 1.2rem;
   font-weight: bold;
+
+  &.Black {
+    color: #111111;
+    background-color: transparent;
+  }
+
+  &.Red {
+    color: #b9062f;
+    background-color: transparent;
+  }
+
+  &.Orange {
+    color: #d2691e;
+    background-color: transparent;
+  }
+
+  &.Purple {
+    color: #483d8b;
+    background-color: transparent;
+  }
+
+  &.Green {
+    color: #006400;
+    background-color: transparent;
+  }
 }
 
 .PCschedule_item_time {

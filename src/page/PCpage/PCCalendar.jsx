@@ -10,7 +10,7 @@ import postSchedule from "../../api/schedule/postSchedule";
 import putSchedule from "../../api/schedule/putSchedule";
 import fetchSchedules from "../../api/schedule/fetchSchedules";
 import fetchSchedulesByDate from "../../api/schedule/fetchSchedulesByDate";
-import deleteSchedule from '../../api/schedule/deleteSchedule';
+import deleteSchedule from "../../api/schedule/deleteSchedule";
 
 const PCCalendar = ({ socket }) => {
   const [schedule, setSchedule] = useState({
@@ -23,9 +23,7 @@ const PCCalendar = ({ socket }) => {
     boxcolor: "",
   }); // 생성하는 스케줄
   const [input, setInput] = useState(""); // 지도에 보내는 검색
-  const [localInput, setLocalInput] = useState('');// 검색창에 들어가는 input
-
-
+  const [localInput, setLocalInput] = useState(""); // 검색창에 들어가는 input
 
   const [selectedSchedule, setSelectedSchedule] = useState(null); // 수정하는 스케줄
 
@@ -56,7 +54,7 @@ const PCCalendar = ({ socket }) => {
     try {
       const date = selectedDate.toLocaleDateString();
       if (schedule._id) {
-        console.log('수정', schedule)
+        console.log("수정", schedule);
         const data = await putSchedule(schedule._id, schedule);
         setSchedule((pre) => ({
           ...pre,
@@ -64,7 +62,7 @@ const PCCalendar = ({ socket }) => {
         }));
       } else {
         const data = await postSchedule(schedule);
-        console.log('저장', schedule)
+        console.log("저장", schedule);
         setSchedule((pre) => ({
           ...pre,
           ...data,
@@ -90,26 +88,26 @@ const PCCalendar = ({ socket }) => {
     e.preventDefault();
     try {
       const date = selectedDate.toLocaleDateString();
-      if(selectedSchedule._id) {
+      if (selectedSchedule._id) {
         await deleteSchedule(selectedSchedule._id);
-        setSelectedSchedule(null)
-      } else {
-        setSchedule({
-          date: "",
-          startTime: "",
-          endTime: "",
-          event: "",
-          location: "",
-          note: "",
-          boxcolor: "",
-        });
+        setSelectedSchedule(null);
       }
+      setSchedule({
+        date: "",
+        startTime: "",
+        endTime: "",
+        event: "",
+        location: "",
+        note: "",
+        boxcolor: "",
+      });
+
       await getSchedulesByDate(date);
       await getSchedules();
     } catch (error) {
       console.log("삭제 실패", error);
     }
-  }
+  };
 
   useEffect(() => {
     getSchedules();
@@ -119,7 +117,7 @@ const PCCalendar = ({ socket }) => {
     const date = selectedDate.toLocaleDateString();
     getSchedulesByDate(date);
     setSelectedSchedule(null);
-  },[selectedDate]);
+  }, [selectedDate]);
 
   return (
     <div className="PCcalendar_root">
@@ -127,7 +125,12 @@ const PCCalendar = ({ socket }) => {
         <PCheader />
         <div className="PCcalendar_main">
           <div className="PCcalendar_schedule">
-            <PCschedule dateSchedules={dateSchedules} setSelectedSchedule={setSelectedSchedule} selectedSchedule={selectedSchedule} />
+            <PCschedule
+              dateSchedules={dateSchedules}
+              setSelectedSchedule={setSelectedSchedule}
+              selectedSchedule={selectedSchedule}
+              selectedDate={selectedDate}
+            />
           </div>
           <div className="PCcalendar_calendar">
             <PCcalendarContent

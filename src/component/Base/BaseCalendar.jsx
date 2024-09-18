@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Calendar from "react-calendar";
 import "./BaseCalendar.scss";
 import "react-calendar/dist/Calendar.css";
@@ -9,12 +9,9 @@ const BaseCalendar = ({
   schedules,
   selectedDate,
   setSelectedDate,
-  setSelectedSchedule,
   selectedSchedule,
-  input,
   setLocalInput,
 }) => {
-  const [infoArray, setInfoArray] = useState([]);
 
   const onChangeDate = (value) => {
     setSelectedDate(value);
@@ -33,7 +30,7 @@ const BaseCalendar = ({
   useEffect(() => {
     if (schedule._id) {
       setSchedule({
-        date: "",
+        date: selectedDate,
         startTime: "",
         endTime: "",
         event: "",
@@ -45,13 +42,9 @@ const BaseCalendar = ({
     setLocalInput("");
   }, [selectedDate]);
 
-  useEffect(() => {
-    console.log(input);
-  }, [selectedDate]);
-
   const handleTileContent = ({ date, view }) => {
     if (view === "month") {
-      const matchedSchedules = infoArray.filter(
+      const matchedSchedules = schedules.filter(
         (item) =>
           new Date(item.date).toLocaleDateString() ===
             date.toLocaleDateString() && item._id !== selectedSchedule?._id
@@ -77,9 +70,6 @@ const BaseCalendar = ({
     return null;
   };
 
-  useEffect(() => {
-    setInfoArray([...schedules]);
-  }, [schedules]);
 
   return (
     <Calendar
