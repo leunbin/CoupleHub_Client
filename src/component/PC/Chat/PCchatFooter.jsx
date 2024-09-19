@@ -6,20 +6,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const PCchatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
+  const [name, setName] = useState(null);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("user-info");
+    if (userInfo) {
+      try {
+        const user = JSON.parse(userInfo);
+        setName(user.name);
+      } catch (error) {
+        console.error("Error parsing user-info:", error);
+      }
+    }
+  }, []);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
       const newMessage = {
         text: message,
-        name: "이은빈",
+        sender: name,
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
       };
 
       socket.emit("message", newMessage);
 
-      setMessage("");
+      setMessage(""); // 메세지 입력 창 메세지
     }
   };
 

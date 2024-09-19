@@ -20,9 +20,9 @@ const MapPlace = ({ dateSchedules }) => {
       </div>
       <div className="MapPlace_info">
         {dateSchedules?.map((item) => (
-          <div className="MapPlace_item">
+          <div className="MapPlace_item" key={item._id}>
             <div className="MapPlace_info_name">
-              <FontAwesomeIcon icon={faLocationDot} /> {item.location}
+              <FontAwesomeIcon icon={faLocationDot} /> {item.location ? item.location : "장소 정보가 제공되지 않았어요 😕"}
             </div>
             <div className="MapPlace_info_address">{item.event}</div>
           </div>

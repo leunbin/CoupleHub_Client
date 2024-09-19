@@ -135,10 +135,6 @@ const PCcalendarEdit = ({
     };
   }, []);
 
-  useEffect(() => {
-    console.log(schedule);
-  }, [schedule]);
-
   return (
     <form className="PCcalendarEdit_root">
       <div className="PCcalendarEdit_button">

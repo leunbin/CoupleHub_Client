@@ -25,9 +25,9 @@ function App() {
     };
   }, []);
 
-  const sendMessage = () => {
-    socket.emit('message', 'Hello from client!');
-  }
+  // const sendMessage = () => {
+  //   socket.emit('message', 'Hello from client!');
+  // }
   return (
     <SidebarProvider>
       <Router socket={socket} />

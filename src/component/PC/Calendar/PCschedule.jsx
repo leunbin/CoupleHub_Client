@@ -30,7 +30,7 @@ const PCschedule = ({
               className={`PCschedule_item ${
                 schedule._id === selectedSchedule?._id ? "active" : ""
               } `}
-              key={schedule.id}
+              key={schedule.id ? schedule._id : Math.random()}
               onClick={() => handleScheduleItem(schedule._id)}
             >
               <div className={`PCschedule_item_event ${schedule.boxcolor}`}>
