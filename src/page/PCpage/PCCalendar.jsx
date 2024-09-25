@@ -43,7 +43,8 @@ const PCCalendar = ({ socket }) => {
   const getSchedulesByDate = async (date) => {
     try {
       const result = await fetchSchedulesByDate(date);
-      setDateSchedules(result);
+      const sortedSchedules = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+      setDateSchedules(sortedSchedules);
     } catch (error) {
       console.log(error);
     }

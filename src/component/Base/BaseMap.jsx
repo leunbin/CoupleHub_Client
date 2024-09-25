@@ -5,7 +5,13 @@ import useGeolocation from "../../hook/useGeolocation";
 import { useLocation } from "react-router-dom";
 import "./BaseMap.scss";
 
-const BaseMap = ({ input, setPlace, place, dateSchedules, selectedSchedule }) => {
+const BaseMap = ({
+  input,
+  setPlace,
+  place,
+  dateSchedules,
+  selectedSchedule,
+}) => {
   useKakaoLoader();
   const userLocation = useGeolocation();
   const location = useLocation();
@@ -64,24 +70,27 @@ const BaseMap = ({ input, setPlace, place, dateSchedules, selectedSchedule }) =>
   }, [map, input, location.pathname, place]);
 
   useEffect(() => {
-    if (location.pathname === "/dashboard" && dateSchedules.location) {
+    if (location.pathname === "/dashboard" && dateSchedules) {
       const bounds = new kakao.maps.LatLngBounds();
+      console.log(dateSchedules);
 
-      dateSchedules?.forEach((item) => {
-        Geocoder.addressSearch(item.location, (data, status) => {
-          if (status === kakao.maps.services.Status.OK) {
-            const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
+      dateSchedules.forEach((item) => {
+        if (item.location) {
+          Geocoder.addressSearch(item.location, (data, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
 
-            const marker = {
-              position: { lat: coords.getLat(), lng: coords.getLng() },
-              content: data[0].address_name,
-            };
+              const marker = {
+                position: { lat: coords.getLat(), lng: coords.getLng() },
+                content: data[0].address_name,
+              };
 
-            setMarkers((prevMarkers) => [...prevMarkers, marker]);
-            bounds.extend(coords);
-            map.setBounds(bounds);
-          }
-        });
+              setMarkers((prevMarkers) => [...prevMarkers, marker]);
+              bounds.extend(coords);
+              map.setBounds(bounds);
+            }
+          });
+        }
       });
     }
   }, [dateSchedules, location.pathname]);

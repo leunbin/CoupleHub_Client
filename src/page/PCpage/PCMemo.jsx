@@ -22,13 +22,17 @@ const PCMemo = ({ socket }) => {
     priority: false,
     dueDate: "",
     author: name,
+    private: false, // 기본적으로 전체 공유
   });
   const [memos, setMemos] = useState([]);
 
   const getMemos = async () => {
     try {
       const result = await fetchMemo();
-      setMemos(result);
+      const filteredMemos = result.filter((memo) => {
+        return memo.private ? memo.author === name : true;
+      });
+      setMemos(filteredMemos);
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +117,7 @@ const PCMemo = ({ socket }) => {
           </div>
           <div className="PCMemo_edit">
             <MemoEdit
-            name={name}
+              name={name}
               memo={memo}
               setMemo={setMemo}
               handleSave={handleSave}

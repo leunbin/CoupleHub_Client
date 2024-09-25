@@ -6,6 +6,8 @@ import {
   faFileCirclePlus,
   faTrash,
   faChevronDown,
+  faLock,
+  faUnlock,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 import CalendarModal from "../Dashboard/CalendarModal";
@@ -17,6 +19,22 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
   const outside = useRef(null);
+  const [isPravite, setIsPrivate] = useState(false);
+
+  useEffect(() => {
+    setIsPrivate(memo.private || false);
+  }, [memo.private]);
+
+  const togglePublic = () => {
+    setIsPrivate((prevState) => {
+      const updatedPrivate = !prevState;
+      setMemo((prevMemo) => ({
+        ...prevMemo,
+        private: !prevMemo.private,
+      }));
+      return updatedPrivate;
+    });
+  };
 
   const onChangeMemo = (e) => {
     setMemo({
@@ -95,13 +113,42 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
     <form className="MemoEdit_root">
       <div className="MemoEdit_button">
         <button
-          className={`MemoEdit_save ${memo.title && memo.type && memo.content.length > 0 ? "active" : ""}`}
+          className={`MemoEdit_save ${
+            memo.title && memo.type && memo.content.length > 0 ? "active" : ""
+          }`}
           onClick={handleSave}
           disabled={memo.title.length > 0 ? false : true}
         >
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
 
+        <div class="toggle-wrapper">
+          <input
+            class="toggle-checkbox"
+            type="checkbox"
+            checked={isPravite}
+            onChange={togglePublic}
+          />
+          <div class="toggle-container">
+            <div class="toggle-button">
+              <FontAwesomeIcon icon={isPravite ? faLock : faUnlock} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <label htmlFor="title" className="MemoEdit_title">
+        제목
+      </label>
+      <div className="MemoEidt_title_tag">
+        <input
+          type="text"
+          id="title"
+          className="MemoEdit_title_input"
+          placeholder="제목"
+          value={memo.title}
+          onChange={onChangeMemo}
+        />
         <button
           type="button"
           className={`MemoEdit_priority ${memo.priority ? "active" : ""}`}
@@ -110,18 +157,6 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
           <FontAwesomeIcon icon={faStar} />
         </button>
       </div>
-
-      <label htmlFor="title" className="MemoEdit_title">
-        제목
-      </label>
-      <input
-        type="text"
-        id="title"
-        className="MemoEdit_title_input"
-        placeholder="제목"
-        value={memo.title}
-        onChange={onChangeMemo}
-      />
 
       <label htmlFor="type" className="MemoEdit_type">
         타입
