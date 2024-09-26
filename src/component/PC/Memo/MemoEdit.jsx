@@ -161,7 +161,7 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
       <label htmlFor="type" className="MemoEdit_type">
         타입
       </label>
-      <div className="Memo_type_div">
+      <div className="Memo_type_div" onClick={handleTypeShow}>
         <input
           id="type"
           type="text"
@@ -173,7 +173,7 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
         <button
           type="button"
           className="MemoEdit_typemodal_btn"
-          onClick={handleTypeShow}
+          
         >
           <FontAwesomeIcon icon={faChevronDown} />
         </button>

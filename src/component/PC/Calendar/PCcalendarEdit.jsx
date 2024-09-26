@@ -171,7 +171,7 @@ const PCcalendarEdit = ({
         시간
       </label>
       <div className="calendar_time_div">
-        <div className="calendar_start_time_div">
+        <div className="calendar_start_time_div" onClick={handleStartTimeShow}>
           <input
             type="text"
             name="startTime"
@@ -179,11 +179,7 @@ const PCcalendarEdit = ({
             className="PCcalendarEdit_time_input"
             readOnly
           />
-          <button
-            type="button"
-            className="time_btn"
-            onClick={handleStartTimeShow}
-          >
+          <button type="button" className="time_btn">
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
           {showstartTimeModal && (
@@ -198,7 +194,7 @@ const PCcalendarEdit = ({
           )}
         </div>
         <span>~</span>
-        <div className="calendar_end_time_div">
+        <div className="calendar_end_time_div" onClick={handleEndTimeShow}>
           <input
             type="text"
             name="endTime"
@@ -206,11 +202,7 @@ const PCcalendarEdit = ({
             className="PCcalendarEdit_time_input"
             readOnly
           />
-          <button
-            type="button"
-            className="time_btn"
-            onClick={handleEndTimeShow}
-          >
+          <button type="button" className="time_btn">
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
           {showendTimeModal && (
@@ -236,6 +228,7 @@ const PCcalendarEdit = ({
           placeholder={currentSchedule.boxcolor}
           value={currentSchedule.boxcolor}
           readOnly
+          handleColorChange={handleColorChange}
         />
         <button
           type="button"
@@ -245,11 +238,7 @@ const PCcalendarEdit = ({
           <FontAwesomeIcon icon={faChevronDown} />
         </button>
         {showColorModal && (
-          <PCcolorModal
-            handleColorChange={handleColorChange}
-            className="Calendar_custom_color_modal"
-            ref={outside}
-          />
+          <PCcolorModal className="Calendar_custom_color_modal" ref={outside} />
         )}
       </div>
 

@@ -32,6 +32,10 @@
   border: none;
   border-radius: 3px;
   cursor: pointer;
+
+  &.active{
+    background-color: #FFBEBE;
+  }
 }
 
 .sidenav_main {
