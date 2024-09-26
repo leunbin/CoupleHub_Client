@@ -221,24 +221,23 @@ const PCcalendarEdit = ({
       <label htmlFor="boxcolor" className="PCcalendarEdit_color">
         태그
       </label>
-      <div className="calendar_color_div">
+      <div className="calendar_color_div" onClick={handleColorShow}>
         <input
           type="text"
           className="PCcalendarEdit_boxcolor_input"
           placeholder={currentSchedule.boxcolor}
           value={currentSchedule.boxcolor}
           readOnly
-          handleColorChange={handleColorChange}
         />
-        <button
-          type="button"
-          className="PCcalendar_colormodal_btn"
-          onClick={handleColorShow}
-        >
+        <button type="button" className="PCcalendar_colormodal_btn">
           <FontAwesomeIcon icon={faChevronDown} />
         </button>
         {showColorModal && (
-          <PCcolorModal className="Calendar_custom_color_modal" ref={outside} />
+          <PCcolorModal
+            className="Calendar_custom_color_modal"
+            ref={outside}
+            handleColorChange={handleColorChange}
+          />
         )}
       </div>
 
