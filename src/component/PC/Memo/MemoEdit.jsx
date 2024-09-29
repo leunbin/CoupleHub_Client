@@ -91,6 +91,8 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
       dueDate: "",
       author: name,
     });
+
+    setDate('');
   };
 
   useEffect(() => {
@@ -196,7 +198,7 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
           className="MemoList_deadline_input"
           placeholder={date ? date.toLocaleDateString() : "비어 있음"}
           value={
-            memo.dueDate ? new Date(memo.dueDate).toLocaleDateString() : ""
+            memo.dueDate ? new Date(memo.dueDate)?.toLocaleDateString() : ""
           }
           readOnly
         />
@@ -206,6 +208,7 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
             setDate={handleDateChange}
             className="Memo_custom_calendar_modal"
             ref={outside}
+            onClick={(e) => e.stopPropagation()} 
           />
         )}
       </div>

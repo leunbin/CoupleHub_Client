@@ -1,5 +1,5 @@
 .PCheader_root {
-  display: flex; /* 수정: 'felx' -> 'flex' */
+  display: flex;
   flex: 1;
   padding: 0.5rem;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
@@ -21,30 +21,29 @@
   gap: 2rem;
 }
 
+.PCheader_link_tag{
+  display: flex;
+  height: 50%;
+  justify-content: space-around;
+}
+
 .PCheader_info {
   display: flex;
   gap: 1rem;
   font-size: 1.5rem;
   align-items: flex-end;
+}
 
-  .PCheader_link {
-    text-decoration: none;
-    position: relative;
+.PCheader_link {
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+  border-bottom: 0.2rem solid transparent;
+  transition: border-bottom-color 1s ease-in-out, border-bottom-width 1s ease-in-out;
 
-    &.active {
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 100%;
-        height: 0.5rem;
-        background: linear-gradient(to bottom, #ff8e99, #ffffff);
-        z-index: -1;
-        border-top-left-radius: 2px; 
-        border-top-right-radius: 2px;
-      }
-    }
+  &.active {
+    border-bottom-color: #ff8e99;
+    border-bottom-width: 0.2rem;
   }
 }
 

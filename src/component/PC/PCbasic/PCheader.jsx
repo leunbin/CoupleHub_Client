@@ -49,26 +49,38 @@ const PCheader = () => {
         <h1 className="title">{getTitle()}</h1>
         <div className="PCheader_navigation">
           <div className="PCheader_info">
-            <Link to="/dashboard">
-              <span className="PCheader_font">
-                Dashboard
-              </span>
-              <div className={`PCheader_link ${path === "/dashboard" ? "active" : ""}`}></div>
-            </Link>
+            <div className="PCheader_link_tag">
+              <Link to="/dashboard">
+                <span className="PCheader_font">Dashboard</span>
+                <div
+                  className={`PCheader_link ${
+                    path === "/dashboard" ? "active" : ""
+                  }`}
+                ></div>
+              </Link>
+            </div>
 
-            <Link to="/calendar">
-              <span className="PCheader_font">
-                Calendar
-              </span>
-              <div className={`PCheader_link ${path === "/calendar" ? "active" : ""}`}></div>
-            </Link>
+            <div className="PCheader_link_tag">
+              <Link to="/calendar">
+                <span className="PCheader_font">Calendar</span>
+                <div
+                  className={`PCheader_link ${
+                    path === "/calendar" ? "active" : ""
+                  }`}
+                ></div>
+              </Link>
+            </div>
 
-            <Link to="/memo">
-              <span className="PCheader_font">
-                Memo
-              </span>
-              <div className={`PCheader_link ${path === "/memo" ? "active" : ""}`}></div>
-            </Link>
+            <div className="PCheader_link_tag">
+              <Link to="/memo">
+                <span className="PCheader_font">Memo</span>
+                <div
+                  className={`PCheader_link ${
+                    path === "/memo" ? "active" : ""
+                  }`}
+                ></div>
+              </Link>
+            </div>
           </div>
           <div className="date">
             <div className="content">
