@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./MemoContent.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faHashtag, faPencil, faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
   faClock,
   faHourglass2,
   faUserCircle,
-  faTrashAlt
+  faTrashAlt,
 } from "@fortawesome/free-regular-svg-icons";
 
-const MemoContent = ({ memo, setMemo }) => {
+const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
   const [items, setItems] = useState(memo.content || []);
   const onChangeMemo = (e) => {
     setMemo({
@@ -52,8 +52,25 @@ const MemoContent = ({ memo, setMemo }) => {
   return (
     <div className="MemoContent_root">
       <div className="MemoContent_info">
-        <div className="MemoContent_title_content">
-          {memo.title === "" ? "제 목" : memo.title}
+        <div className="MemoContent_header">
+          <div className="MemoContent_title_content">
+            {memo.title === "" ? "제 목" : memo.title}
+          </div>
+          {isEditModal ? (
+            <button
+              className="MemoContent_editBtn_close"
+              onClick={handleMemoEditModal}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          ) : (
+            <button
+              className="MemoContent_editBtn"
+              onClick={handleMemoEditModal}
+            >
+              <FontAwesomeIcon icon={faPencil} className="editBtn_icon" />
+            </button>
+          )}
         </div>
         <div className="MemoContent_createdDate">
           <span className="MemoContent_createdDate_title">
@@ -78,9 +95,7 @@ const MemoContent = ({ memo, setMemo }) => {
             <FontAwesomeIcon icon={faHashtag} /> 타입
           </span>
           <div
-            className={`MemoContent_type_content ${
-              memo.type ? "" : "type"
-            }`}
+            className={`MemoContent_type_content ${memo.type ? "" : "type"}`}
           >
             {memo.type ? memo.type : "비어 있음"}
           </div>
@@ -90,10 +105,12 @@ const MemoContent = ({ memo, setMemo }) => {
           <span className="MemoContent_deadline_title">
             <FontAwesomeIcon icon={faHourglass2} /> deadline
           </span>
-          <div className={`MemoContent_deadline_content ${
+          <div
+            className={`MemoContent_deadline_content ${
               memo.deadline ? "" : "type"
-            }`}>
-            {memo.dueDate === '' || memo.dueDate === null
+            }`}
+          >
+            {memo.dueDate === "" || memo.dueDate === null
               ? "비어 있음"
               : new Date(memo.dueDate).toLocaleDateString()}
           </div>

@@ -14,8 +14,7 @@ import CalendarModal from "../Dashboard/CalendarModal";
 import "./MemoEdit.scss";
 import MemoTypeModal from "./MemoTypeModal";
 
-const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
-  const [date, setDate] = useState(null);
+const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete, isEditModal, date, setDate }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
   const outside = useRef(null);
@@ -81,20 +80,6 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
     setShowTypeModal(false);
   };
 
-  const handleAdd = () => {
-    setMemo({
-      title: "",
-      createdDate: new Date(),
-      type: "",
-      content: [],
-      priority: false,
-      dueDate: "",
-      author: name,
-    });
-
-    setDate('');
-  };
-
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (outside.current && !outside.current.contains(e.target)) {
@@ -108,11 +93,11 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
   }, []);
 
   useEffect(() => {
-    console.log(memo);
-  }, [memo]);
+    console.log(isEditModal);
+  }, [isEditModal]);
 
   return (
-    <form className="MemoEdit_root">
+    <form className={`MemoEdit_root ${isEditModal ? 'slide-in' : 'slide-out'}`}>
       <div className="MemoEdit_button">
         <button
           className={`MemoEdit_save ${
@@ -224,10 +209,8 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete }) => {
         readOnly
       />
 
-      <div className="MemoEdit_button">
-        <button type="button" className="MemoEdit_addBtn" onClick={handleAdd}>
-          <FontAwesomeIcon icon={faFileCirclePlus} />
-        </button>
+      <div className="MemoEdit_button_sec">
+
 
         <button
           type="button"

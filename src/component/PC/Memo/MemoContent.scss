@@ -19,6 +19,90 @@
   margin-bottom: 0.5rem;
 }
 
+.MemoContent_header {
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MemoContent_editBtn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+  font-size: 1rem;
+
+  &:hover {
+    width: 8rem;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: #32b8ff;
+    align-items: center;
+
+    .editBtn_icon{
+      width: 20px;
+      transition-duration: 0.3s;
+      transform: translateY(60%);
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+
+    &::before{
+      display: block;
+      padding-right: 10px;
+      font-size: 1rem;
+      opacity: 1;
+      transform: translateY(0px);
+      transition-duration: 0.3s;
+    }
+  }
+
+  &::before{
+    display: none;
+    content: "Edit";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 1rem;
+  }
+}
+
+.editBtn_icon {
+  color: #ffffff;
+  font-size: 1rem;
+  transition-duration: 0.3s;
+}
+
+.MemoContent_editBtn_close {
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  padding: 0;
+  font-size: inherit;
+  margin-right: 0;
+}
+
 .MemoContent_title_content {
   height: 3rem;
   font-weight: 700;

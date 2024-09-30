@@ -25,6 +25,18 @@ const PCMemo = ({ socket }) => {
     private: false, // 기본적으로 전체 공유
   });
   const [memos, setMemos] = useState([]);
+  const [isEditModal, setIsEditModal] = useState(false);
+  const [isVisible, setIsVisible] = useState(isEditModal);
+  const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    if (isEditModal) {
+      setIsVisible(true); // 모달이 열리면 바로 보이도록 설정
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 500); // 애니메이션이 끝난 후 숨김 처리
+      return () => clearTimeout(timer);
+    }
+  }, [isEditModal]);
 
   const getMemos = async () => {
     try {
@@ -100,9 +112,35 @@ const PCMemo = ({ socket }) => {
     }
   };
 
+  const handleMemoEditModal = () => {
+    if (isEditModal) {
+      setIsEditModal(false);
+    } else {
+      setIsEditModal(true);
+    }
+  };
+
+  const handleAdd = () => {
+    setMemo({
+      title: "",
+      createdDate: new Date(),
+      type: "",
+      content: [],
+      priority: false,
+      dueDate: "",
+      author: name,
+    });
+
+    setDate("");
+  };
+
   useEffect(() => {
     getMemos();
   }, []);
+
+  useEffect(() => {
+    console.log(isEditModal);
+  }, [isEditModal]);
 
   return (
     <div className="PCMemo_root">
@@ -110,21 +148,40 @@ const PCMemo = ({ socket }) => {
         <PCheader />
         <div className="PCMemo_main">
           <div className="PCMemo_list">
-            <MemoList memos={memos} clickMemo={clickMemo} memo={memo} />
+            <MemoList
+              memos={memos}
+              clickMemo={clickMemo}
+              memo={memo}
+              handleAdd={handleAdd}
+            />
           </div>
           <div className="PCMemo_memo">
-            <MemoContent memo={memo} setMemo={setMemo} />
+            <MemoContent
+              memo={memo}
+              setMemo={setMemo}
+              handleMemoEditModal={handleMemoEditModal}
+              isEditModal={isEditModal}
+            />
           </div>
-          <div className="PCMemo_edit">
+
+          <div
+            className={`PCMemo_edit ${isEditModal ? "slide-in" : "slide-out"} ${
+              !isVisible && "hidden"
+            }`}
+          >
             <MemoEdit
               name={name}
               memo={memo}
               setMemo={setMemo}
               handleSave={handleSave}
               handleDelete={handleDelete}
+              isEditModal={isEditModal}
+              date={date}
+              setDate={setDate}
             />
           </div>
         </div>
+
         <PCfooter socket={socket} />
       </PCsidenav>
     </div>

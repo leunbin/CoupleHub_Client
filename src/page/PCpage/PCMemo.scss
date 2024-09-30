@@ -1,3 +1,21 @@
+@keyframes slideIn {
+  from {
+    transform: translateX(100%); // 화면 밖에서 시작
+  }
+  to {
+    transform: translateX(0); // 원래 위치로 이동
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .PCMemo_main{
   padding: 0.5rem;
   width: calc(100vw - 3rem);
@@ -23,6 +41,18 @@
 .PCMemo_edit{
   width: 20%;
   height: 91.7vh;
+
+  &.slide-in {
+    animation: slideIn 0.5s ease-in-out;
+  }
+
+  &.slide-out {
+    animation: slideOut 0.5s ease-in-out;
+  }
+
+  &.hidden {
+    display: none;
+  }
 }
 
 @media screen and (max-height:800px) {
