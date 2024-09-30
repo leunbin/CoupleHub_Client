@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./MemoContent.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag, faPencil, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHashtag,
+  faPencil,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faClock,
   faHourglass2,
   faUserCircle,
   faTrashAlt,
 } from "@fortawesome/free-regular-svg-icons";
+import putMemo from "../../../api/memo/putMemo";
 
 const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
   const [items, setItems] = useState(memo.content || []);
@@ -26,11 +31,22 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
     setMemo({ ...memo, content: items });
   }, [items, setMemo]);
 
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = async (index) => {
     const updatedItems = items.map((item, i) =>
       i === index ? { ...item, completed: !item.completed } : item
     );
     setItems(updatedItems);
+
+    const updatedMemo = {
+      ...memo,
+      content: updatedItems,
+    };
+  
+    try {
+      await putMemo(memo._id, updatedMemo);
+    } catch(error) {
+      console.log(error)
+    }
   };
 
   const handleAddItem = (e) => {
@@ -54,7 +70,7 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
       <div className="MemoContent_info">
         <div className="MemoContent_header">
           <div className="MemoContent_title_content">
-            {memo.title === "" ? "제 목" : memo.title}
+            {memo.title === "" ? "제목" : memo.title}
           </div>
           {isEditModal ? (
             <button
@@ -125,15 +141,18 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
             value={memo.content}
             onChange={onChangeMemo}
             placeholder={"여기에 메모를 추가하세요..."}
-          ></textarea>
+            readOnly={isEditModal ? false : true}
+          />
         )}
         {memo.type === "Checklist" && (
           <>
-            <input
-              placeholder="여기에 체크리스트 항목을 추가하세요..."
-              onKeyDown={handleAddItem}
-              className="CheckboxList_input"
-            ></input>
+            {isEditModal ? (
+              <input
+                placeholder="여기에 체크리스트 항목을 추가하세요..."
+                onKeyDown={handleAddItem}
+                className="CheckboxList_input"
+              />
+            ) : null}
 
             <div className="CheckboxList_items">
               {items.map((item, index) => (
@@ -148,14 +167,15 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
                       type="checkbox"
                       checked={item.completed}
                       onChange={() => handleCheckboxChange(index)}
+                      value={item._id + index}
                     />
-                    <span>{item.text}</span>
+                    <label htmlFor={item._id + index}>{item.text}</label>
                   </div>
                   <button
                     className="CheckboxList_item_delete"
                     onClick={() => handleDelete(index)}
                   >
-                    <FontAwesomeIcon icon={faTrashAlt} />
+                    {isEditModal && <FontAwesomeIcon icon={faTrashAlt} />}
                   </button>
                 </div>
               ))}

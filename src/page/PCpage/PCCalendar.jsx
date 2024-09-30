@@ -63,7 +63,6 @@ const PCCalendar = ({ socket }) => {
     try {
       const date = selectedDate.toLocaleDateString();
       if (schedule._id) {
-        console.log("수정", schedule);
         const data = await putSchedule(schedule._id, schedule);
         setSchedule((pre) => ({
           ...pre,
@@ -71,7 +70,6 @@ const PCCalendar = ({ socket }) => {
         }));
       } else {
         const data = await postSchedule(schedule);
-        console.log("저장", schedule);
         setSchedule((pre) => ({
           ...pre,
           ...data,
@@ -88,8 +86,10 @@ const PCCalendar = ({ socket }) => {
       });
       await getSchedulesByDate(date);
       await getSchedules();
+      window.alert('성공적으로 저장했습니다 😊');
     } catch (error) {
       console.log("저장실패", error);
+      window.alert('저장에 실패하였습니다 😢')
     }
   };
 
@@ -113,8 +113,10 @@ const PCCalendar = ({ socket }) => {
 
       await getSchedulesByDate(date);
       await getSchedules();
+      window.alert('성공적으로 삭제했습니다 😊');
     } catch (error) {
       console.log("삭제 실패", error);
+      window.alert('삭제 실패하였습니다 😢')
     }
   };
 

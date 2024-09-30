@@ -72,7 +72,6 @@ const BaseMap = ({
   useEffect(() => {
     if (location.pathname === "/dashboard" && dateSchedules) {
       const bounds = new kakao.maps.LatLngBounds();
-      console.log(dateSchedules);
 
       dateSchedules.forEach((item) => {
         if (item.location) {
@@ -94,10 +93,6 @@ const BaseMap = ({
       });
     }
   }, [dateSchedules, location.pathname]);
-
-  useEffect(() => {
-    console.log(selectedSchedule);
-  }, [selectedSchedule]);
 
   return (
     <div className="BaseMap_root">

@@ -49,6 +49,7 @@ const PCMemo = ({ socket }) => {
       console.log(error);
     }
   };
+
   const handleSave = async (e) => {
     e.preventDefault();
     try {
@@ -67,8 +68,11 @@ const PCMemo = ({ socket }) => {
       }
 
       await getMemos();
+
+      window.alert('성공적으로 저장했습니다 😊')
     } catch (error) {
       console.log("저장실패", error);
+      window.alert('저장에 실패하였습니다 😢')
     }
   };
 
@@ -107,8 +111,10 @@ const PCMemo = ({ socket }) => {
         });
       }
       await getMemos();
+      window.alert('성공적으로 삭제했습니다 😊')
     } catch (error) {
       console.log("삭제 실패", error);
+      window.alert('삭제 실패하였습니다 😢')
     }
   };
 
@@ -130,18 +136,14 @@ const PCMemo = ({ socket }) => {
       dueDate: "",
       author: name,
     });
-
     setDate("");
+    setIsEditModal(true);
   };
 
   useEffect(() => {
     getMemos();
   }, []);
-
-  useEffect(() => {
-    console.log(isEditModal);
-  }, [isEditModal]);
-
+  
   return (
     <div className="PCMemo_root">
       <PCsidenav>

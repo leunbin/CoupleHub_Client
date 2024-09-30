@@ -92,10 +92,6 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete, isEditModal, 
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isEditModal);
-  }, [isEditModal]);
-
   return (
     <form className={`MemoEdit_root ${isEditModal ? 'slide-in' : 'slide-out'}`}>
       <div className="MemoEdit_button">
