@@ -23,7 +23,11 @@ const BaseMap = ({
   const Place = new kakao.maps.services.Places();
 
   useEffect(() => {
-    if (selectedSchedule && selectedSchedule.location !== "" && map) {
+    console.log(input)
+  },[input])
+
+  useEffect(() => {
+    if (selectedSchedule && selectedSchedule.location !== "" && map && input === '') {
       Geocoder.addressSearch(selectedSchedule.location, (data, status) => {
         if (status === kakao.maps.services.Status.OK) {
           const bounds = new kakao.maps.LatLngBounds();
@@ -44,11 +48,12 @@ const BaseMap = ({
 
   useEffect(() => {
     if (!map || !input) return;
+    console.log('input', input)
 
     Geocoder.addressSearch(input, (data, status) => {
       if (
         status === kakao.maps.services.Status.OK &&
-        location.pathname === "/calendar"
+        location.pathname === "/schedule"
       ) {
         const bounds = new kakao.maps.LatLngBounds();
         const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
@@ -65,7 +70,7 @@ const BaseMap = ({
         Place.keywordSearch(input, (data, status) => {
           if (
             status === kakao.maps.services.Status.OK &&
-            location.pathname === "/calendar"
+            location.pathname === "/schedule"
           ) {
             const bounds = new kakao.maps.LatLngBounds();
 

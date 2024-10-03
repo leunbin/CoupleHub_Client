@@ -272,7 +272,7 @@ const PCcalendarEdit = ({
           selectedSchedule={selectedSchedule}
           localInput={localInput}
         />
-        {location.pathname === "/calendar" && (
+        {location.pathname === "/schedule" && (
           <div className="PCcalendarEdit_MapSearch">
             <MapSearch
               input={input}
