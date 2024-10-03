@@ -1,6 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./MapSearch.scss";
 
 const MapSearch = ({ input, setInput, localInput, setLocalInput }) => {

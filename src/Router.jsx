@@ -15,7 +15,7 @@ const Router = ({ socket }) => {
         <Routes>
           <Route path="/" element={<GuestRoute component={Home} />} />
           <Route path="/dashboard" element={<ProtectedRoute component={PCDashboard} socket={socket} />} />
-          <Route path="/calendar" element={<ProtectedRoute component={PCCalendar} socket={socket} />} />
+          <Route path="/schedule" element={<ProtectedRoute component={PCCalendar} socket={socket} />} />
           <Route path="/memo" element={<ProtectedRoute component={PCMemo} socket={socket} />} />
         </Routes>
       </PC>

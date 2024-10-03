@@ -84,6 +84,9 @@ const PCCalendar = ({ socket }) => {
         note: "",
         boxcolor: "",
       });
+
+      setLocalInput('')
+      
       await getSchedulesByDate(date);
       await getSchedules();
       window.alert('성공적으로 저장했습니다 😊');

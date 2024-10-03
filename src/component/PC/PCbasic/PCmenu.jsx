@@ -8,14 +8,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./PCmenu.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSidebar } from "../../../store/SidebarContext";
 
 const PCmenu = () => {
   const { setIsMenuOpen} = useSidebar();
   const [isMenuClosing, setIsMenuClosing] = useState(false);
+  const [path, setPath] = useState('');
   const outside = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClose = () => {
     setIsMenuClosing(true);
@@ -28,6 +30,10 @@ const PCmenu = () => {
     localStorage.removeItem('user-info');
     navigate('/')
   }
+
+  useEffect(() => {
+    setPath(location.pathname);
+  },[location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -53,21 +59,21 @@ const PCmenu = () => {
       </button>
 
       <Link to="/dashboard" className='PCmenu_tag'>
-        <button className="PCmenu_button">
+        <button className={`PCmenu_button ${path === '/dashboard' ? 'active' : ''}`}>
           <FontAwesomeIcon icon={faGauge} />
-          <span>Dashboard</span>
+          <span className="PCmenu_span">Dashboard</span>
         </button>
       </Link>
 
-      <Link to="/calendar" className='PCmenu_tag'>
-        <button className="PCmenu_button">
+      <Link to="/schedule" className='PCmenu_tag'>
+        <button className={`PCmenu_button ${path === '/schedule' ? 'active' : ''}`}>
           <FontAwesomeIcon icon={faCalendar} />
-          <span>Calendar</span>
+          <span>Schedule</span>
         </button>
       </Link>
       
       <Link to="/memo" className='PCmenu_tag'>
-        <button className="PCmenu_button">
+        <button className={`PCmenu_button ${path === '/memo' ? 'active' : ''}`}>
           <FontAwesomeIcon icon={faList} />
           <span>Memo</span>
         </button>

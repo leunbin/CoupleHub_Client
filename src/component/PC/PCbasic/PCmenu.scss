@@ -41,7 +41,7 @@
   animation: slideOut 0.3s ease-in-out;
 }
 
-.PCmenu_bars_button{
+.PCmenu_bars_button {
   width: 2rem;
   height: 2rem;
   font-size: 1rem;
@@ -62,9 +62,13 @@
   justify-content: flex-start;
   border: none;
   border-radius: 3px;
+
+  &.active {
+    background-color: #ffbebe;
+  }
 }
 
-.PCmenu_tag{
+.PCmenu_tag {
   display: block;
   width: 100%;
 }
@@ -73,6 +77,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .PCmenu_logout {

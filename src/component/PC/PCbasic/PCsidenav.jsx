@@ -51,10 +51,10 @@ const PCsidenav = ({ children }) => {
               </button>
             </Link>
 
-            <Link to="/calendar">
+            <Link to="/schedule">
               <button
                 className={`sidenav_button ${
-                  path === "/calendar" ? "active" : ""
+                  path === "/schedule" ? "active" : ""
                 }`}
               >
                 <FontAwesomeIcon icon={faCalendar} />

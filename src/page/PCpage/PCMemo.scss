@@ -1,4 +1,4 @@
-@keyframes slideIn {
+@keyframes MemoslideIn {
   from {
     transform: translateX(100%); // 화면 밖에서 시작
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes slideOut {
+@keyframes MemoslideOut {
   from {
     transform: translateX(0);
   }
@@ -43,11 +43,11 @@
   height: 91.7vh;
 
   &.slide-in {
-    animation: slideIn 0.5s ease-in-out;
+    animation: MemoslideIn 0.5s ease-in-out;
   }
 
   &.slide-out {
-    animation: slideOut 0.5s ease-in-out;
+    animation: MemoslideOut 0.5s ease-in-out;
   }
 
   &.hidden {

@@ -14,7 +14,7 @@ import CalendarModal from "../Dashboard/CalendarModal";
 import "./MemoEdit.scss";
 import MemoTypeModal from "./MemoTypeModal";
 
-const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete, isEditModal, date, setDate }) => {
+const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, setDate }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
   const outside = useRef(null);
@@ -105,15 +105,15 @@ const MemoEdit = ({ name, memo, setMemo, handleSave, handleDelete, isEditModal, 
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
 
-        <div class="toggle-wrapper">
+        <div className="toggle-wrapper">
           <input
-            class="toggle-checkbox"
+            className="toggle-checkbox"
             type="checkbox"
             checked={isPravite}
             onChange={togglePublic}
           />
-          <div class="toggle-container">
-            <div class="toggle-button">
+          <div className="toggle-container">
+            <div className="toggle-button">
               <FontAwesomeIcon icon={isPravite ? faLock : faUnlock} />
             </div>
           </div>

@@ -23,6 +23,26 @@ const BaseMap = ({
   const Place = new kakao.maps.services.Places();
 
   useEffect(() => {
+    if (selectedSchedule && selectedSchedule.location !== "" && map) {
+      Geocoder.addressSearch(selectedSchedule.location, (data, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          const bounds = new kakao.maps.LatLngBounds();
+          const coords = new kakao.maps.LatLng(data[0].y, data[0].x);
+
+          const marker = {
+            position: { lat: coords.getLat(), lng: coords.getLng() },
+            content: data[0].address_name,
+          };
+
+          setMarkers((prevMarkers) => [...prevMarkers, marker]);
+          bounds.extend(coords);
+          map.setBounds(bounds);
+        }
+      });
+    }
+  }, [selectedSchedule]);
+
+  useEffect(() => {
     if (!map || !input) return;
 
     Geocoder.addressSearch(input, (data, status) => {

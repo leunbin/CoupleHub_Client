@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./PCheader.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,9 @@ import Weather from "./Weather";
 
 const PCheader = () => {
   const [name, setName] = useState(null);
+  const [prevOffsetLeft, setPrevOffsetLeft] = useState(0);
+  const sliderRef = useRef(null);
+  const linksRef = useRef([]);
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user-info");
@@ -23,6 +26,29 @@ const PCheader = () => {
   const location = useLocation();
   const path = location.pathname;
 
+  useEffect(() => {
+    const activeLink = linksRef.current.find(
+      (link) => link.dataset.path === path
+    );
+
+    if (activeLink) {
+      const { offsetWidth } = activeLink;
+      const { offsetLeft } = activeLink;
+
+      sliderRef.current.style.width = `${offsetWidth}px`;
+      sliderRef.current.style.left = `${offsetLeft}px`;
+      sliderRef.current.style.transition =
+        "left 0.3s ease-in-out, width 0.3s ease-in-out";
+
+      setPrevOffsetLeft(offsetLeft);
+      console.log(offsetLeft);
+    }
+  }, [path]);
+
+  useEffect(() => {
+    console.log("prevOffset", prevOffsetLeft);
+  }, [prevOffsetLeft]);
+
   const today = new Date().toLocaleDateString();
   const todayData = new Date();
   const couple = new Date("2024-04-03");
@@ -34,8 +60,8 @@ const PCheader = () => {
     switch (path) {
       case "/dashboard":
         return "Dashboard";
-      case "/calendar":
-        return "Calendar";
+      case "/schedule":
+        return "Schedule";
       case "/memo":
         return "Memo";
       default:
@@ -49,38 +75,36 @@ const PCheader = () => {
         <h1 className="title">{getTitle()}</h1>
         <div className="PCheader_navigation">
           <div className="PCheader_info">
-            <div className="PCheader_link_tag">
+            <div
+              className="PCheader_link_tag"
+              ref={(el) => (linksRef.current[0] = el)}
+              data-path="/dashboard"
+            >
               <Link to="/dashboard">
                 <span className="PCheader_font">Dashboard</span>
-                <div
-                  className={`PCheader_link ${
-                    path === "/dashboard" ? "active" : ""
-                  }`}
-                ></div>
               </Link>
             </div>
 
-            <div className="PCheader_link_tag">
-              <Link to="/calendar">
-                <span className="PCheader_font">Calendar</span>
-                <div
-                  className={`PCheader_link ${
-                    path === "/calendar" ? "active" : ""
-                  }`}
-                ></div>
+            <div
+              className="PCheader_link_tag"
+              ref={(el) => (linksRef.current[1] = el)}
+              data-path="/schedule"
+            >
+              <Link to="/schedule">
+                <span className="PCheader_font">Schedule</span>
               </Link>
             </div>
 
-            <div className="PCheader_link_tag">
+            <div
+              className="PCheader_link_tag"
+              ref={(el) => (linksRef.current[2] = el)}
+              data-path="/memo"
+            >
               <Link to="/memo">
                 <span className="PCheader_font">Memo</span>
-                <div
-                  className={`PCheader_link ${
-                    path === "/memo" ? "active" : ""
-                  }`}
-                ></div>
               </Link>
             </div>
+            <div className="PCheader_slider" ref={sliderRef}></div>
           </div>
           <div className="date">
             <div className="content">
