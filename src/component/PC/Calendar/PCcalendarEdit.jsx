@@ -8,7 +8,11 @@ import PCtimeModal from "./PCtimeModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 
-import { faChevronDown, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRotateLeft,
+  faChevronDown,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const PCcalendarEdit = ({
   schedule,
@@ -107,6 +111,19 @@ const PCcalendarEdit = ({
     setShowColorModal(false);
   };
 
+  const handleRefresh = (e) => {
+    e.preventDefault();
+    setSchedule((prevSchedule) => ({
+      startTime: "",
+      endTime: "",
+      event: "",
+      location: "",
+      note: "",
+      boxcolor: "",
+      date: prevSchedule.date, // 선택한 날짜 유지
+    }));
+  };
+
   useEffect(() => {
     if (currentSchedule._id) {
       setSelectedSchedule({
@@ -133,24 +150,42 @@ const PCcalendarEdit = ({
     };
   }, []);
 
+  useEffect(() => {
+    console.log(schedule);
+  }, [schedule]);
+
   return (
     <form className="PCcalendarEdit_root">
       <div className="PCcalendarEdit_button">
         <button
-          className={`PCcalendarEdit_save ${schedule.event ? 'active' : ''}`}
+          className={`PCcalendarEdit_save ${schedule.event ? "active" : ""}`}
           type="button"
           onClick={handleSave}
         >
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
 
-        <button
-          className={`PCcalendarEdit_delete ${selectedSchedule ? 'active' : ''}`}
-          type="button"
-          onClick={handleDelete}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
+        {selectedSchedule ? (
+          <button
+            className={`PCcalendarEdit_delete ${
+              selectedSchedule ? "active" : ""
+            }`}
+            type="button"
+            onClick={handleDelete}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={`PCcalendarEdit_refresh ${
+              schedule.event !== "" || schedule.location !== "" ? "active" : ""
+            }`}
+            onClick={(e) => handleRefresh(e)}
+          >
+            <FontAwesomeIcon icon={faArrowRotateLeft} />
+          </button>
+        )}
       </div>
 
       <label htmlFor="event" className="PCcalendarEdit_event">

@@ -72,6 +72,10 @@ const MemoContent = ({
     setItems(updatedItems);
   };
 
+  useEffect(() => {
+    console.log(memo)
+  },[memo])
+
   return (
     <div className="MemoContent_root">
       <div className="MemoContent_info">
@@ -80,6 +84,12 @@ const MemoContent = ({
         </div>
         <div className="MemoContent_btn_Tag">
           {isEditModal ? null : (
+            <button className="MemoContent_addBtn" onClick={handleAdd}>
+              <FontAwesomeIcon icon={faPlus} className="editBtn_icon" />
+            </button>
+          )}
+          
+          {isEditModal || (memo && (memo._id === null || memo.title === '')) ? null : (
             <button
               className="MemoContent_editBtn"
               onClick={handleMemoEditModal}
@@ -88,11 +98,6 @@ const MemoContent = ({
             </button>
           )}
 
-          {isEditModal ? null : (
-            <button className="MemoContent_addBtn" onClick={handleAdd}>
-              <FontAwesomeIcon icon={faPlus} className="editBtn_icon" />
-            </button>
-          )}
         </div>
         <div className="MemoContent_createdDate">
           <span className="MemoContent_createdDate_title">
