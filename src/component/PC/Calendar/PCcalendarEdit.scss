@@ -15,7 +15,8 @@
 }
 
 .PCcalendarEdit_save,
-.PCcalendarEdit_delete {
+.PCcalendarEdit_delete,
+.PCcalendarEdit_refresh {
   color: #b4b4b4;
   display: flex;
   align-items: center;
@@ -42,6 +43,10 @@
       background-color: #ffbebe;
     }
   }
+}
+
+.PCcalendarEdit_refresh.active {
+  color: #14d3ff;
 }
 
 .PCcalendarEdit_delete.active {
