@@ -39,8 +39,15 @@
 }
 
 .PCMemo_edit{
-  width: 20%;
+  display: flex;
+  position: relative;
+  width: 25%;
   height: 91.7vh;
+  align-items: flex-start;
+  z-index: 100;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
 
   &.slide-in {
     animation: MemoslideIn 0.5s ease-in-out;
@@ -53,6 +60,23 @@
   &.hidden {
     display: none;
   }
+}
+
+.PCMemo_close_btn {
+  display: flex;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  color: #111111; 
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.PCMemo_close_btn:hover {
+  color: #ff4444;
+  background-color: transparent;
 }
 
 @media screen and (max-height:800px) {

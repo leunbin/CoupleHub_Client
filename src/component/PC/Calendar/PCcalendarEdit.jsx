@@ -6,11 +6,9 @@ import { useLocation } from "react-router-dom";
 import PCcolorModal from "./PCcolorModal";
 import PCtimeModal from "./PCtimeModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faFloppyDisk,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
+
+import { faChevronDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const PCcalendarEdit = ({
   schedule,
@@ -139,7 +137,7 @@ const PCcalendarEdit = ({
     <form className="PCcalendarEdit_root">
       <div className="PCcalendarEdit_button">
         <button
-          className="PCcalendarEdit_save"
+          className={`PCcalendarEdit_save ${schedule.event ? 'active' : ''}`}
           type="button"
           onClick={handleSave}
         >
@@ -147,7 +145,7 @@ const PCcalendarEdit = ({
         </button>
 
         <button
-          className="PCcalendarEdit_delete"
+          className={`PCcalendarEdit_delete ${selectedSchedule ? 'active' : ''}`}
           type="button"
           onClick={handleDelete}
         >

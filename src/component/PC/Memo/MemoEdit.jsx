@@ -3,18 +3,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendar,
   faStar,
-  faFileCirclePlus,
   faTrash,
   faChevronDown,
   faLock,
   faUnlock,
 } from "@fortawesome/free-solid-svg-icons";
-import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
+import { faFloppyDisk, faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import CalendarModal from "../Dashboard/CalendarModal";
 import "./MemoEdit.scss";
 import MemoTypeModal from "./MemoTypeModal";
 
-const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, setDate }) => {
+const MemoEdit = ({
+  memo,
+  setMemo,
+  handleSave,
+  handleDelete,
+  isEditModal,
+  date,
+  setDate,
+  handleMemoEditModal
+}) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
   const outside = useRef(null);
@@ -93,7 +101,7 @@ const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, 
   }, []);
 
   return (
-    <form className={`MemoEdit_root ${isEditModal ? 'slide-in' : 'slide-out'}`}>
+    <form className={`MemoEdit_root ${isEditModal ? "slide-in" : "slide-out"}`}>
       <div className="MemoEdit_button">
         <button
           className={`MemoEdit_save ${
@@ -106,17 +114,16 @@ const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, 
         </button>
 
         <div className="toggle-wrapper">
-          <input
-            className="toggle-checkbox"
-            type="checkbox"
-            checked={isPravite}
-            onChange={togglePublic}
-          />
-          <div className="toggle-container">
-            <div className="toggle-button">
-              <FontAwesomeIcon icon={isPravite ? faLock : faUnlock} />
-            </div>
-          </div>
+          <label htmlFor="inpLock" className={`btn-lock ${isPravite ? "lock" : ""}`}>
+            <input
+              id="inpLock"
+              className="toggle-checkbox"
+              type="checkbox"
+              checked={isPravite}
+              onChange={togglePublic}
+            />
+            <FontAwesomeIcon className="lock-icon" icon={isPravite ? faLock : faUnlock} />
+          </label>
         </div>
       </div>
 
@@ -153,11 +160,7 @@ const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, 
           value={memo.type}
           readOnly
         />
-        <button
-          type="button"
-          className="MemoEdit_typemodal_btn"
-          
-        >
+        <button type="button" className="MemoEdit_typemodal_btn">
           <FontAwesomeIcon icon={faChevronDown} />
         </button>
         {showTypeModal && (
@@ -189,7 +192,7 @@ const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, 
             setDate={handleDateChange}
             className="Memo_custom_calendar_modal"
             ref={outside}
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           />
         )}
       </div>
@@ -206,8 +209,6 @@ const MemoEdit = ({ memo, setMemo, handleSave, handleDelete, isEditModal, date, 
       />
 
       <div className="MemoEdit_button_sec">
-
-
         <button
           type="button"
           className={`MemoEdit_deleteBtn ${memo._id ? "active" : ""}`}

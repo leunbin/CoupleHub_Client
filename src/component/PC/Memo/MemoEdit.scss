@@ -6,6 +6,7 @@
   align-items: center;
   padding: 0.5rem;
   box-sizing: border-box;
+  position: relative;
 }
 
 .MemoEdit_button {
@@ -14,7 +15,7 @@
   width: 100%;
 }
 
-.MemoEdit_button_sec{
+.MemoEdit_button_sec {
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -35,10 +36,6 @@
   box-sizing: border-box;
 }
 
-.MemoEdit_save {
-  color: #4caf50;
-}
-
 .MemoEdit_priority {
   color: #ff9800;
 }
@@ -51,9 +48,17 @@
   color: #b4b4b4;
   cursor: not-allowed !important;
 
+  &:hover {
+    background-color: transparent;
+  }
+
   &.active {
     color: #4caf50;
     cursor: pointer !important;
+
+    &:hover {
+      background-color: #ffbebe;
+    }
   }
 }
 
@@ -234,56 +239,34 @@
   margin: 0.2rem;
 }
 
-.toggle-checkbox {
-  appearance: none;
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  font: inherit;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.toggle-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 4rem;
-  height: 2.4rem;
-  background-color: #e8e8e8;
-  border-radius: 40px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.toggle-checkbox:checked + .toggle-container {
-  background-color: #ffaaaf;
-  box-shadow: 0 0 10px rgba(255, 170, 175, 0.4);
-}
-
-.toggle-button {
+.btn-lock {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  left: 0.1rem;
+  background-color: #eee;
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
   border-radius: 50%;
-  width: 1.8rem;
-  height: 1.8rem;
-  font-size: 0.8rem;
-  background-color: #ffffff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  transition: left 0.4s ease, background-color 0.4s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #3c3c3c;
+
+  &.lock {
+    color: #f06e6e;
+    background-color: #fff0f0;
+  }
+
+  -webkit-tap-highlight-color: transparent;
 }
 
-.toggle-checkbox:checked + .toggle-container > .toggle-button {
-  left: calc(100% - 1.9rem);
+#inpLock {
+  display: none;
 }
 
-.toggle-container:hover .toggle-button {
-  background-color: #f1f1f1;
+#inpLock:checked + label {
+  background: #20cca5;
 }
 
 .MemoEidt_title_tag {

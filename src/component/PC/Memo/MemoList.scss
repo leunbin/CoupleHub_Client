@@ -26,38 +26,6 @@
   }
 }
 
-.List_BtnTag {
-  display: flex;
-  width: 100%;
-  height: 2.5rem;
-  margin-bottom: 0.5rem;
-  justify-content: flex-end;
-}
-
-.List_addBtn {
-  display: flex;
-  width: auto;
-  height: 100%;
-  border: 2px solid #24b4fb;
-  background-color: #24b4fb;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
-  transition: all ease-in-out 0.2s;
-  box-sizing: border-box;
-
-  &:hover{
-    background-color: #0071e2;
-  }
-}
-
-.List_addBtn_span{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-}
-
 .List_item {
   display: flex;
   justify-content: space-between;

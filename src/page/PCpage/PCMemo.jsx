@@ -11,6 +11,8 @@ import postMemo from "../../api/memo/postMemo";
 import fetchMemoById from "../../api/memo/fetchMemoById";
 import putMemo from "../../api/memo/putMemo";
 import deleteMemo from "../../api/memo/deleteMemo";
+import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PCMemo = ({ socket }) => {
   const name = JSON.parse(localStorage.getItem("user-info")).name;
@@ -69,10 +71,10 @@ const PCMemo = ({ socket }) => {
 
       await getMemos();
 
-      window.alert('성공적으로 저장했습니다 😊')
+      window.alert("성공적으로 저장했습니다 😊");
     } catch (error) {
       console.log("저장실패", error);
-      window.alert('저장에 실패하였습니다 😢')
+      window.alert("저장에 실패하였습니다 😢");
     }
   };
 
@@ -111,10 +113,10 @@ const PCMemo = ({ socket }) => {
         });
       }
       await getMemos();
-      window.alert('성공적으로 삭제했습니다 😊')
+      window.alert("성공적으로 삭제했습니다 😊");
     } catch (error) {
       console.log("삭제 실패", error);
-      window.alert('삭제 실패하였습니다 😢')
+      window.alert("삭제 실패하였습니다 😢");
     }
   };
 
@@ -143,7 +145,7 @@ const PCMemo = ({ socket }) => {
   useEffect(() => {
     getMemos();
   }, []);
-  
+
   return (
     <div className="PCMemo_root">
       <PCsidenav>
@@ -163,6 +165,7 @@ const PCMemo = ({ socket }) => {
               setMemo={setMemo}
               handleMemoEditModal={handleMemoEditModal}
               isEditModal={isEditModal}
+              handleAdd={handleAdd}
             />
           </div>
 
@@ -171,6 +174,12 @@ const PCMemo = ({ socket }) => {
               !isVisible && "hidden"
             }`}
           >
+            <button
+              className="PCMemo_close_btn"
+              onClick={handleMemoEditModal}
+            >
+              <FontAwesomeIcon icon={faXmarkCircle} />
+            </button>
             <MemoEdit
               name={name}
               memo={memo}
@@ -180,6 +189,7 @@ const PCMemo = ({ socket }) => {
               isEditModal={isEditModal}
               date={date}
               setDate={setDate}
+              handleMemoEditModal={handleMemoEditModal}
             />
           </div>
         </div>

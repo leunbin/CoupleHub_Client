@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHashtag,
   faPencil,
+  faPlus,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -14,7 +15,13 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import putMemo from "../../../api/memo/putMemo";
 
-const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
+const MemoContent = ({
+  memo,
+  setMemo,
+  handleMemoEditModal,
+  isEditModal,
+  handleAdd,
+}) => {
   const [items, setItems] = useState(memo.content || []);
   const onChangeMemo = (e) => {
     setMemo({
@@ -41,11 +48,11 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
       ...memo,
       content: updatedItems,
     };
-  
+
     try {
       await putMemo(memo._id, updatedMemo);
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -68,23 +75,22 @@ const MemoContent = ({ memo, setMemo, handleMemoEditModal, isEditModal }) => {
   return (
     <div className="MemoContent_root">
       <div className="MemoContent_info">
-        <div className="MemoContent_header">
-          <div className="MemoContent_title_content">
-            {memo.title === "" ? "제목" : memo.title}
-          </div>
-          {isEditModal ? (
-            <button
-              className="MemoContent_editBtn_close"
-              onClick={handleMemoEditModal}
-            >
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
-          ) : (
+        <div className="MemoContent_title_content">
+          {memo.title === "" ? "제목" : memo.title}
+        </div>
+        <div className="MemoContent_btn_Tag">
+          {isEditModal ? null : (
             <button
               className="MemoContent_editBtn"
               onClick={handleMemoEditModal}
             >
               <FontAwesomeIcon icon={faPencil} className="editBtn_icon" />
+            </button>
+          )}
+
+          {isEditModal ? null : (
+            <button className="MemoContent_addBtn" onClick={handleAdd}>
+              <FontAwesomeIcon icon={faPlus} className="editBtn_icon" />
             </button>
           )}
         </div>

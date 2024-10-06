@@ -12,13 +12,6 @@ const MemoList = ({ memos, clickMemo, memo, handleAdd }) => {
   const sortedMemos = memos.sort((a, b) => b.priority - a.priority);
   return (
     <div className="List_root">
-      <div className="List_BtnTag">
-      <button className="List_addBtn" onClick={handleAdd}>
-        <span className="List_addBtn_span">
-          <FontAwesomeIcon icon={faPlus} /> New
-        </span>
-      </button>
-      </div>
       {sortedMemos.map((item) => (
         <div
           className={`List_item ${item._id === memo._id ? "active" : ""}`}
