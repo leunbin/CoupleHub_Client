@@ -9,31 +9,41 @@
 }
 
 .Weather_root{
-  width: 4rem;
-  height: 2rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: auto;
   font-weight: 400;
   overflow: hidden;
 }
 
 .icon_img {
-  font-size: 2rem;
+  font-size: 10rem;
 }
 
-.Weather_icon,
-.Weather_info,
-.Weather_tmp {
-  animation: slideUp 0.5s ease-in-out;
-  animation-fill-mode: forwards; 
+.Weather_icon{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
 }
 
-.Weather_info{
+.Weather_content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.Weather_tmp_content,
+.Weather_info_content{
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 2rem;
+  color: #464646;
 }

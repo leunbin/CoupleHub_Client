@@ -1,7 +1,7 @@
-.PCdashboard_main{
-  padding: 0.5rem;
+.PCdashboard_main {
   width: calc(100vw - 3rem);
   flex: 1;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
@@ -11,8 +11,198 @@
 .PCdashboard_main_right {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 30%;
   height: 100%;
+  justify-content: center;
+  gap: 3rem;
+  padding: 3rem;
+  box-sizing: border-box;
+  background-color: #ffebf0;
+}
+
+.PCdashboard_title {
+  display: flex;
+  height: auto;
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.PCdashboard_font1 {
+  display: flex;
+  align-items: baseline;
+}
+
+.PCdashboard_today-check {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.PCdashboard_today-schedule {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.PCdashboard_schedule_tag {
+  height: 50%;
+}
+
+.PCdashboard_schedules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #ffdce1;
+      border: 2px solid #ffdce1;
+      border-radius: 12px;
+    }
+  }
+}
+
+.PCdashboard_schedule {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.PCdashboard_schedule_event,
+.PCdashboard_schedule_time,
+.PCdashboard_schedule_location,
+.PCdashboard_schedule_note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event_title,
+.schedule_title,
+.location_title,
+.note_title {
+  font-size: 1.5rem;
+  color: #464646;
+  font-weight: 100;
+}
+
+.event_content,
+.schedule_content,
+.location_content,
+.note_content {
+  color: #828282;
+}
+
+.noSchedules {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #464646;
+}
+
+.PCdashboard_schedule_link {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  color: #828282;
+}
+
+.PCdashboard_btn_tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PCdashboard_schedule_btn {
+  width: 12rem;
+  height: 5rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #111111;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.PCdashboard_map_btn {
+  width: 12rem;
+  height: 5rem;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #111111;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.PCdashboard_weather_btn {
+  width: 12rem;
+  height: 5rem;
+  border-radius: 0px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #111111;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.PCdashboard_schedule_btn.active,
+.PCdashboard_map_btn.active,
+.PCdashboard_weather_btn.active {
+  background-color: #ffbebe;
+  transition: all 0.3s ease-in-out;
+}
+
+.PCdashboard_map_tag {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.PCdashboard_map {
+  width: 100%;
+  height: 70%;
+}
+
+.PCdashboard_place {
+  width: 100%;
+  height: 30%;
 }
 
 .PCdashboard_main_left {
@@ -20,52 +210,112 @@
   margin-left: 0.5rem;
 }
 
-.PCdashboard_line1{
+.PCdashboard_memo {
+  height: 91.7vh;
+  width: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+.PCdashboard_memo_deadline {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  gap: 0.5rem;
+}
+
+.PCdashboard_memo_title {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #464646;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #464646;
+}
+
+.PCdashboard_memo_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 2rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  border: 1px solid #f06464;
+}
+
+.PCdashboard_memo_content {
   width: 100%;
   height: 40%;
-  margin-bottom: 0.5rem;
-}
-
-.PCdashboard_weekplan{
-  width: 100%;
-  height: 100%;
-}
-
-.PCdashboard_line2{
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
   display: flex;
-  justify-content: space-between;
-}
-
-.PCdashboard_map{
-  height: 66.5vh;
-  width: 80%;
-  overflow: hidden;
-  border-radius: 5px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
-.PCdashboard_place{
-  height: 66.5vh;
-  width: 20%;
+.memos_item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  box-sizing: border-box;
 }
 
-.PCdashboard_memo{
-  height: 91.7vh;
-  width: 100%;
+.memo_front {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.memo_private {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+
+  &.false {
+    color: #50c8ff;
+    background-color: #beefff;
+  }
+
+  &.true {
+    color: #329632;
+    background-color: #6dd66d;
+  }
+}
+
+.memo_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #464646;
+  font-weight: 700;
+}
+
+.memo_status {
+  color: #147814;
+
+  &.complete {
+    color: #c32e61;
+  }
 }
 
 @media screen and (max-height: 800px) {
-  .PCdashboard_map {
+  .PCdashboard_place {
     height: 60vh;
   }
-  .PCdashboard_place {
-    height:60vh
-  }
-  .PCdashboard_memo{
+  .PCdashboard_memo {
     height: 87vh;
   }
 }

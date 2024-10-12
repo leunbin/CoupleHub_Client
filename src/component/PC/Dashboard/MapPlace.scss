@@ -5,30 +5,8 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  border-radius: 8px; 
   background-color: #f9f9f9; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.faThumbTack{
-  color: #ff9800;
-}
-
-.MapPlace_day {
-  width: 100%;
-  padding: 0.5rem 1rem; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #dcdcdc; 
-  margin-bottom: 0.5rem;
-}
-
-.MapPlace_day span {
-  font-size: 1rem; 
-  color: #333;
 }
 
 .MapPlace_info {
@@ -36,6 +14,23 @@
   padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #ffdce1;
+      border: 2px solid #ffdce1;
+      border-radius: 12px;
+    }
+  }
 }
 
 .MapPlace_info_name {

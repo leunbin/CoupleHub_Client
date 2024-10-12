@@ -88,9 +88,8 @@ const Weather = () => {
   });
   const convertedCoords = convertCoords;
 
-  const classes = ["Weather_icon", "Weather_info", "Weather_tmp"];
-  const [className, setClassName] = useState(classes[0]);
-  
+  // const classes = ["Weather_icon", "Weather_info", "Weather_tmp"];
+  // const [className, setClassName] = useState(classes[0]);
 
   useEffect(() => {
     const { date, time } = getBase();
@@ -113,7 +112,8 @@ const Weather = () => {
           .catch((error) =>
             console.log({
               success: false,
-              message:  "Error setting weather data🌩️:", error,
+              message: "Error setting weather data🌩️:",
+              error,
             })
           );
       }
@@ -172,17 +172,17 @@ const Weather = () => {
     setTmp(tmp);
   }, [weatherData]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setClassName(prev => {
-        const currIdx = classes.indexOf(prev);
-        const nextIdx = (currIdx+1) % classes.length;
-        return classes[nextIdx];
-      })
-    },3000);
-    
-    return () => clearInterval(interval);
-  },[])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setClassName((prev) => {
+  //       const currIdx = classes.indexOf(prev);
+  //       const nextIdx = (currIdx + 1) % classes.length;
+  //       return classes[nextIdx];
+  //     });
+  //   }, 3000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
 
   let icon;
 
@@ -207,7 +207,11 @@ const Weather = () => {
   } else if (sky === "맑음") {
     icon = (
       <>
-        <FontAwesomeIcon icon={faSun} style={{ color: "#FF0000" }} className="icon_img" />
+        <FontAwesomeIcon
+          icon={faSun}
+          style={{ color: "#FF0000" }}
+          className="icon_img"
+        />
       </>
     );
   } else if (sky === "구름많음") {
@@ -229,18 +233,21 @@ const Weather = () => {
   return (
     <div className="Weather_root">
       {weatherData ? (
-        <div className={className} key={className}>
-          {className === "Weather_icon" && icon}
-          {className === "Weather_info" && (
-            <>
-              {rain !== "알 수 없음" && rain !== "없음" && <span>{rain}</span>}
-              {sky !== "알 수 없음" && <span>{sky}</span>}
-            </>
-          )}
-          {className=== "Weather_tmp" && <span>{tmp}°C</span>}
+        <div className="Weather_icon">
+          {icon}
+          <div className="Weather_content">
+            <div className="Weather_info">
+              {rain !== "알 수 없음" && rain !== "없음" && <span className="Weather_info_content">{rain}</span>}
+              {sky !== "알 수 없음" && <span className="Weather_info_content">{sky}</span>}
+            </div>
+
+            <div className="Weather_tmp">
+              <span className="Weather_tmp_content">{tmp}°C</span>
+            </div>
+          </div>
         </div>
       ) : (
-        <FontAwesomeIcon icon={faSpinner} />
+        <FontAwesomeIcon icon={faSpinner} className="icon_img" />
       )}
     </div>
   );

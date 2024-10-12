@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./MemoModal.scss";
 import fetchMemoByDuedate from "../../../api/memo/fetchMemoByDuedate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
+import defaultimage from '../../../assets/defaultimage.jpg';
 
 const MemoModal = () => {
   const [name, setName] = useState(null);
@@ -42,7 +45,11 @@ const MemoModal = () => {
   };
 
   const handleTitleClick = (memoId) => {
-    setSelectedMemoId(memoId);
+    if (selectedMemoId === memoId) {
+      setSelectedMemoId("");
+    } else {
+      setSelectedMemoId(memoId);
+    }
   };
 
   useEffect(() => {
@@ -51,10 +58,11 @@ const MemoModal = () => {
 
   return (
     <div className="MemoModal_root">
-      <div className="MemoModal_title">마감 임박 알림 🔔</div>
       <div className="MemoModal_content">
         {memos.length === 0 ? (
-          <div className="MemoModal_noMemos">No schedules for today 😢</div>
+          <div className="MemoModal_noMemos">
+            <img src={defaultimage} alt="기본 이미지" />
+          </div>
         ) : (
           memos
             .filter((memo) => memo.author === name)
@@ -69,6 +77,17 @@ const MemoModal = () => {
                     className="MemoModal_memoTitle"
                     onClick={() => handleTitleClick(memo._id)}
                   >
+                    <div
+                      className={`memoItem_type ${
+                        memo.type === "Checklist" ? "checklist" : "note"
+                      }`}
+                    >
+                      {memo.type === "Note" ? (
+                        <FontAwesomeIcon icon={faNoteSticky} />
+                      ) : (
+                        <FontAwesomeIcon icon={faCircleCheck} />
+                      )}
+                    </div>
                     {memo.title}
                   </span>
                   <span className="MemoModal_memoDueDate">

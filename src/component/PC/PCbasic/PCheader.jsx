@@ -111,7 +111,7 @@ const PCheader = () => {
               <span>{today}</span>
               <span className="PCheader_user">hi, {name}</span>
             </div>
-            <Weather />
+            {/* <Weather /> */}
             <div className="couple_date">
               <FontAwesomeIcon icon={faHeart} />
               {differenceInDays}
