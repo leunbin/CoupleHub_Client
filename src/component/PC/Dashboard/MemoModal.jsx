@@ -55,17 +55,17 @@ const MemoModal = () => {
   useEffect(() => {
     getMemo(date);
   }, [date]);
-
+  
   return (
-    <div className="MemoModal_root">
+    <div className={`MemoModal_root ${memos.length === 0 ? 'default' : ''}`}>
       <div className="MemoModal_content">
         {memos.length === 0 ? (
           <div className="MemoModal_noMemos">
-            <img src={defaultimage} alt="기본 이미지" />
+            <img src={defaultimage} alt="기본 이미지" className="default_image" />
           </div>
         ) : (
           memos
-            .filter((memo) => memo.author === name)
+            .filter((memo) => !memo.private || (memo.private && memo.author === name))
             .map((memo) => (
               <div key={memo._id} className="MemoModal_memoItem">
                 <div

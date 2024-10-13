@@ -22,6 +22,8 @@ const PCDashboard = ({ socket }) => {
   const today = new Date();
   const date = today.toLocaleDateString();
 
+  const username = JSON.parse(localStorage.getItem("user-info")).name;
+
   const getSchedulesByDate = async (date) => {
     try {
       const result = await fetchSchedulesByDate(date);
@@ -34,7 +36,8 @@ const PCDashboard = ({ socket }) => {
   const getMemos = async () => {
     try {
       const result = await fetchMemo();
-      const data = result.slice(0, 4);
+      const filtered = result.filter((item) => !item.private || (item.private && item.author === username))
+      const data = filtered.slice(0, 4);
       setMemos(data);
     } catch (error) {
       console.log(error);
