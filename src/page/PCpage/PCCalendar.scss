@@ -1,33 +1,108 @@
-.PCcalendar_main{
+.PCcalendar_main {
+  position: relative;
   padding: 0.5rem;
   width: calc(100vw - 3rem);
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
   gap: 0.5rem;
+  padding: 1rem;
 }
 
-.PCcalendar_schedule{
-  width: 15%;
-  height: 91.7vh;
+.PCcalendar_Add_modal {
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 800px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 1000;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #ffdce1;
+      border: 2px solid #ffdce1;
+      border-radius: 12px;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
-.PCcalendar_calendar{
-  height: 91.7vh;
+.PCcalendar_Modal_Overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.PCcalendar_btn_Tag {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 2rem 2rem 0 2rem;
+  box-sizing: border-box;
+}
+
+.PCcalendar_add_btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  background-color: #ff8e99;
+  color: #ffffff;
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbebe;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.PCcalendar_calendar {
   flex: 1;
+  padding: 0 3rem 3rem 3rem;
+  box-sizing: border-box;
 }
 
-.PCcalendar_edit{
+.PCcalendar_edit {
   width: 30%;
   height: 91.7vh;
 }
 
-@media screen and (max-height:800px) {
-  .PCcalendar_schedule,
-  .PCcalendar_main,
-  .PCcalendar_edit {
-    height: 87vh;
-  }
-}
+// @media screen and (max-height:800px) {
+//   .PCcalendar_schedule,
+//   .PCcalendar_main,
+//   .PCcalendar_edit {
+//     height: 87vh;
+//   }
+// }

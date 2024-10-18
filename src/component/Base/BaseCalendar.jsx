@@ -11,6 +11,7 @@ const BaseCalendar = ({
   setSelectedDate,
   selectedSchedule,
   setLocalInput,
+  handleOpenModal
 }) => {
 
   const onChangeDate = (value) => {
@@ -19,6 +20,7 @@ const BaseCalendar = ({
       ...schedule,
       date: value,
     });
+    handleOpenModal();
   };
 
   useEffect(() => {

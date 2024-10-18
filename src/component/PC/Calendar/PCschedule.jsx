@@ -7,6 +7,7 @@ const PCschedule = ({
   setSelectedSchedule,
   selectedSchedule,
   selectedDate,
+  handleOpenAddModal
 }) => {
   const handleScheduleItem = async (id) => {
     const result = await fetchScheduleById(id);
@@ -52,6 +53,12 @@ const PCschedule = ({
           </div>
         )}
       </div>
+
+    <footer className="PCschedule_footer">
+      <button className="PCschedule_add_btn" onClick={handleOpenAddModal}>
+        ADD EVENT
+      </button>
+    </footer>
     </div>
   );
 };

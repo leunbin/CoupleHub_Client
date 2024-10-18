@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PCsidenav from "../../component/PC/PCbasic/PCsidenav";
 import PCheader from "../../component/PC/PCbasic/PCheader";
 import PCfooter from "../../component/PC/PCbasic/PCfooter";
@@ -13,6 +13,7 @@ import fetchSchedulesByDate from "../../api/schedule/fetchSchedulesByDate";
 import deleteSchedule from "../../api/schedule/deleteSchedule";
 
 const PCCalendar = ({ socket }) => {
+  const outside = useRef();
   const [schedule, setSchedule] = useState({
     date: "",
     startTime: "",
@@ -24,6 +25,8 @@ const PCCalendar = ({ socket }) => {
   }); // 생성하는 스케줄
   const [input, setInput] = useState(""); // 지도에 보내는 검색
   const [localInput, setLocalInput] = useState(""); // 검색창에 들어가는 input
+  const [isModal, setIsModal] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
 
   const [selectedSchedule, setSelectedSchedule] = useState(null); // 수정하는 스케줄
 
@@ -43,7 +46,7 @@ const PCCalendar = ({ socket }) => {
   const getSchedulesByDate = async (date) => {
     try {
       const result = await fetchSchedulesByDate(date);
-  
+
       const sortedSchedules = result.sort((a, b) => {
         if (!a.startTime) return -1;
         if (!b.startTime) return 1;
@@ -51,7 +54,7 @@ const PCCalendar = ({ socket }) => {
         const dateB = new Date(date + " " + b.startTime);
         return dateA - dateB;
       });
-  
+
       setDateSchedules(sortedSchedules);
     } catch (error) {
       console.log(error);
@@ -75,24 +78,28 @@ const PCCalendar = ({ socket }) => {
           ...data,
         }));
       }
-      setSchedule({
-        date: "",
-        startTime: "",
-        endTime: "",
-        event: "",
-        location: "",
-        note: "",
-        boxcolor: "",
-      });
 
-      setLocalInput('')
-      
+      // setIsModal(false);
+      // setIsAdd(false);
+      // setSchedule({
+      //   date: "",
+      //   startTime: "",
+      //   endTime: "",
+      //   event: "",
+      //   location: "",
+      //   note: "",
+      //   boxcolor: "",
+      // });
+
+      setLocalInput("");
+
       await getSchedulesByDate(date);
       await getSchedules();
-      window.alert('성공적으로 저장했습니다 😊');
+
+      window.alert("성공적으로 저장했습니다 😊");
     } catch (error) {
       console.log("저장실패", error);
-      window.alert('저장에 실패하였습니다 😢')
+      window.alert("저장에 실패하였습니다 😢");
     }
   };
 
@@ -116,12 +123,55 @@ const PCCalendar = ({ socket }) => {
 
       await getSchedulesByDate(date);
       await getSchedules();
-      window.alert('성공적으로 삭제했습니다 😊');
+      window.alert("성공적으로 삭제했습니다 😊");
     } catch (error) {
       console.log("삭제 실패", error);
-      window.alert('삭제 실패하였습니다 😢')
+      window.alert("삭제 실패하였습니다 😢");
     }
   };
+
+  const handleOpenModal = () => {
+    setIsModal((prev) => !prev);
+  };
+
+  const handleOpenAddModal = () => {
+    setIsModal((prev) => !prev);
+    setIsAdd((prev) => !prev);
+  };
+
+  const handleClose = () => {
+    setIsModal(false);
+    setIsAdd(false);
+    setSelectedSchedule(null);
+    setSchedule({
+      date: "",
+      startTime: "",
+      endTime: "",
+      event: "",
+      location: "",
+      note: "",
+      boxcolor: "",
+    });
+  };
+
+  const handlePrev = () => {
+    console.log("handlePrev 실행됨");
+    setSelectedSchedule(null);
+    setIsAdd(false);
+    setIsModal(true);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (outside.current && !outside.current.contains(e.target)) {
+        handleClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     getSchedules();
@@ -138,14 +188,41 @@ const PCCalendar = ({ socket }) => {
       <PCsidenav>
         <PCheader />
         <div className="PCcalendar_main">
-          <div className="PCcalendar_schedule">
-            <PCschedule
-              dateSchedules={dateSchedules}
-              setSelectedSchedule={setSelectedSchedule}
-              selectedSchedule={selectedSchedule}
-              selectedDate={selectedDate}
-            />
-          </div>
+          {isModal && !selectedSchedule && (
+            <>
+              <div className="PCcalendar_Modal_Overlay"></div>
+              <div className="PCcalendar_Add_modal" ref={outside}>
+                <PCschedule
+                  dateSchedules={dateSchedules}
+                  setSelectedSchedule={setSelectedSchedule}
+                  selectedSchedule={selectedSchedule}
+                  selectedDate={selectedDate}
+                  handleOpenAddModal={handleOpenAddModal}
+                />
+              </div>
+            </>
+          )}
+          {(isAdd || selectedSchedule) && (
+            <>
+              <div className="PCcalendar_Modal_Overlay"></div>
+              <div className="PCcalendar_Add_modal" ref={outside}>
+                <PCcalendarEdit
+                  schedule={schedule}
+                  setSchedule={setSchedule}
+                  handleSave={handleSave}
+                  handleDelete={handleDelete}
+                  selectedSchedule={selectedSchedule}
+                  setSelectedSchedule={setSelectedSchedule}
+                  input={input}
+                  setInput={setInput}
+                  localInput={localInput}
+                  setLocalInput={setLocalInput}
+                  handlePrev={handlePrev}
+                />
+              </div>
+            </>
+          )}
+          {/* </div> */}
           <div className="PCcalendar_calendar">
             <PCcalendarContent
               schedule={schedule}
@@ -158,20 +235,7 @@ const PCCalendar = ({ socket }) => {
               setInput={setInput}
               input={input}
               setLocalInput={setLocalInput}
-            />
-          </div>
-          <div className="PCcalendar_edit">
-            <PCcalendarEdit
-              schedule={schedule}
-              setSchedule={setSchedule}
-              handleSave={handleSave}
-              handleDelete={handleDelete}
-              selectedSchedule={selectedSchedule}
-              setSelectedSchedule={setSelectedSchedule}
-              input={input}
-              setInput={setInput}
-              localInput={localInput}
-              setLocalInput={setLocalInput}
+              handleOpenModal={handleOpenModal}
             />
           </div>
         </div>

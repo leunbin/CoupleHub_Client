@@ -13,6 +13,7 @@ const PCcalendarContent = ({
   setInput,
   input,
   setLocalInput,
+  handleOpenModal
 }) => {
   return (
     <div className="PCcalendarContent_root">
@@ -27,6 +28,7 @@ const PCcalendarContent = ({
         setInput={setInput}
         input={input}
         setLocalInput={setLocalInput}
+        handleOpenModal={handleOpenModal}
       />
     </div>
   );
